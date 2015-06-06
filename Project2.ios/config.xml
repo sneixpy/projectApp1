@@ -51,6 +51,7 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
+    <gap:plugin name="com.sharinglabs.cordova.plugin.datepicker" />
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="www/res/icon/android/icon-36-ldpi.png" />
     <icon gap:platform="android" gap:qualifier="mdpi" src="www/res/icon/android/icon-48-mdpi.png" />
@@ -108,5 +109,11 @@
     <feature name="Contacts">
         <param name="ios-package" value="CDVContacts" />
     </feature>
+    <feature name="DatePicker">
+		<param name="ios-package" value="DatePicker"/>
+	</feature>
+	<feature name="DatePickerPlugin">
+		<param name="android-package" value="com.sharinglabs.cordova.plugin.datepicker.DatePickerPlugin"/>
+	</feature>
     <engine name="ios" spec="^3.8.0" />
 </widget>

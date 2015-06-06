@@ -36,10 +36,10 @@ var MemoryStore = function(successCallback, errorCallback) {
         }
     }
 	this.challenges = [
-            {"id": 1, "Name": "Cycling"},
-            {"id": 2, "Name": "Running"},
-            {"id": 3, "Name": "Steps"},
-			{"id": 4, "Name": "Body Weight"}
+            {"num": 1, "Name": "Cycling"},
+            {"num": 2, "Name": "Running"},
+            {"num": 3, "Name": "Steps"},
+			{"num": 4, "Name": "Body Weight"}
         ];
     this.employees = [
             {"id": 1, "firstName": "Ryan", "lastName": "Howard", "title":"Vice President, North East", "managerId": 0, "city":"New York, NY", "cellPhone":"212-999-8888", "officePhone":"212-999-8887", "email":"ryan@dundermifflin.com"},

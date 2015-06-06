@@ -1,4 +1,4 @@
-var app = {
+var app = {  // main app navigates and readys the app content.
 	showAlert: function (message, title) {
 		if (navigator.notification) {
 			navigator.notification.alert(message, null, title, 'OK');
@@ -27,19 +27,31 @@ var app = {
 			});
 		}
 	},
-	route: function(id) {
+	route: function(id) {  // Function to navigate all to all different pages
 		var self = this;
 		if (!id) {
 			if (this.homePage) {
 				this.slidePage(this.homePage);
 			} else {
-				this.homePage = new HomeView(this.store).render();
+				this.homePage = new HomeView().render();
 				this.slidePage(this.homePage);
 			}
 			return;
 		}else{
-			this.store.findById(Number(id), function(employee) {
-				self.slidePage(new ChallengeView(employee).render());
+			var Challenge = Parse.Object.extend("Challenge");
+			var query = new Parse.Query(Challenge);
+			query.equalTo("num", id);
+			query.find({
+			  success: function(results) {
+				for (var i = 0; i < results.length; i++) { 
+				  var object = results[i];
+				  self.slidePage(new ChallengeDetails(object.get('Name')).render());
+				  $( ".date-input-css" ).datepicker();
+				}
+			  },
+			  error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			  }
 			});
 		}
 	},
@@ -83,11 +95,21 @@ var app = {
 	},
 	initialize: function() {
 		var self = this;
+		Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3tQ4ACY2XrJIdmJA91grNHrs");
 		this.registerEvents();
-		this.store = new MemoryStore();
 		this.route();
-		this.store.list(function(challenges) {
-			$('.challenge-list').html(app.liTemplate(challenges));
+		var Challenge = Parse.Object.extend("Challenge");
+		var Challenges = Parse.Collection.extend({
+			model: Challenge
+		});
+		var challenges = new Challenges();
+		challenges.fetch({
+			success: function(challenges) {
+				$('.challenge-list').html(app.liTemplate(challenges.toJSON()));
+			},
+			error: function(challenges, error) {
+				console.log(error);
+			}
 		});
 	}
 };

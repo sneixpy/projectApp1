@@ -39,6 +39,8 @@
 		7E7966E61810823500FA85AD /* icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DC1810823500FA85AD /* icon-small.png */; };
 		7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DD1810823500FA85AD /* icon-small@2x.png */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
+		B9219271D72D46858C7304BC /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0521751B584B8586A370CA /* DatePicker.m */; };
+		990341FA175D44FCA1034369 /* DatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2849ADDAB59D486C821CCC80 /* DatePicker.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +106,9 @@
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "Project1/config.xml"; sourceTree = "<group>"; };
+		3A0521751B584B8586A370CA /* DatePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "DatePicker.m"; path = "com.sharinglabs.cordova.plugin.datepicker/DatePicker.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		39542DB05BB747468A4B6FD1 /* DatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "DatePicker.h"; path = "com.sharinglabs.cordova.plugin.datepicker/DatePicker.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		2849ADDAB59D486C821CCC80 /* DatePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "DatePicker.xib"; path = "DatePicker.xib"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +181,7 @@
 				308D052D1370CCF300D202BF /* icons */,
 				308D05311370CCF300D202BF /* splash */,
 				8D1107310486CEB800E47090 /* Project1-Info.plist */,
+				2849ADDAB59D486C821CCC80 /* DatePicker.xib */,
 			);
 			name = Resources;
 			path = "Project1/Resources";
@@ -202,6 +208,8 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				3A0521751B584B8586A370CA /* DatePicker.m */,
+				39542DB05BB747468A4B6FD1 /* DatePicker.h */,
 			);
 			name = Plugins;
 			path = "Project1/Plugins";
@@ -355,6 +363,7 @@
 				7E7966E11810823500FA85AD /* icon-50@2x.png in Resources */,
 				7E7966E51810823500FA85AD /* icon-76@2x.png in Resources */,
 				30FC414916E50CA1004E6F35 /* icon-72@2x.png in Resources */,
+				990341FA175D44FCA1034369 /* DatePicker.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +395,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
+				B9219271D72D46858C7304BC /* DatePicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
