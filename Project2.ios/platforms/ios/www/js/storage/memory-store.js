@@ -14,16 +14,16 @@ var MemoryStore = function(successCallback, errorCallback) {
         callLater(callback, challenges);
     }
     this.findById = function(id, callback) {
-        var employees = this.employees;
-        var employee = null;
-        var l = employees.length;
+        var challenges = this.challenges;
+        var challenge = null;
+        var l = challenges.length;
         for (var i=0; i < l; i++) {
-            if (employees[i].id === id) {
-                employee = employees[i];
+            if (challenges[i].id === id) {
+                challenge = challenges[i];
                 break;
             }
         }
-        callLater(callback, employee);
+        callLater(callback, challenge);
     }
 
     // Used to simulate async calls. This is done to provide a consistent interface with stores (like WebSqlStore)
@@ -36,9 +36,10 @@ var MemoryStore = function(successCallback, errorCallback) {
         }
     }
 	this.challenges = [
-            {"id": 1, "Name": "Cycling miles", "lastName": "Howard", "title":"Vice President, North East", "managerId": 0, "city":"New York, NY", "cellPhone":"212-999-8888", "officePhone":"212-999-8887", "email":"ryan@dundermifflin.com"},
-            {"id": 2, "Name": "Running miles", "lastName": "Scott", "title":"Regional Manager", "managerId": 1, "city":"Scranton, PA", "cellPhone":"570-865-2536", "officePhone":"570-123-4567", "email":"michael@dundermifflin.com"},
-            {"id": 3, "Name": "Total miles", "lastName": "Schrute", "title":"Assistant Regional Manager", "managerId": 2, "city":"Scranton, PA", "cellPhone":"570-865-1158", "officePhone":"570-843-8963", "email":"dwight@dundermifflin.com"}
+            {"id": 1, "Name": "Cycling"},
+            {"id": 2, "Name": "Running"},
+            {"id": 3, "Name": "Steps"},
+			{"id": 4, "Name": "Body Weight"}
         ];
     this.employees = [
             {"id": 1, "firstName": "Ryan", "lastName": "Howard", "title":"Vice President, North East", "managerId": 0, "city":"New York, NY", "cellPhone":"212-999-8888", "officePhone":"212-999-8887", "email":"ryan@dundermifflin.com"},

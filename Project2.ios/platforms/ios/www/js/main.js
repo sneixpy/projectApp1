@@ -8,8 +8,6 @@ var app = {
 	},
 	registerEvents: function() {
 		var self = this;
-		$(window).on('hashchange', $.proxy(this.route, this));
-
 		// Check of browser supports touch events...
 		if (document.documentElement.hasOwnProperty('ontouchstart')) {
 			// ... if yes: register touch event listener to change the "selected" state of the item
@@ -29,10 +27,9 @@ var app = {
 			});
 		}
 	},
-	route: function() {
+	route: function(id) {
 		var self = this;
-		var hash = window.location.hash;
-		if (!hash) {
+		if (!id) {
 			if (this.homePage) {
 				this.slidePage(this.homePage);
 			} else {
@@ -40,11 +37,9 @@ var app = {
 				this.slidePage(this.homePage);
 			}
 			return;
-		}
-		var match = hash.match(this.detailsURL);
-		if (match) {
-			this.store.findById(Number(match[1]), function(employee) {
-				self.slidePage(new EmployeeView(employee).render());
+		}else{
+			this.store.findById(Number(id), function(employee) {
+				self.slidePage(new ChallengeView(employee).render());
 			});
 		}
 	},
@@ -88,17 +83,19 @@ var app = {
 	},
 	initialize: function() {
 		var self = this;
-		this.detailsURL = /^#employees\/(\d{1,})/;
 		this.registerEvents();
-		this.store = new MemoryStore(function() {
-			self.route();
-		});
+		this.store = new MemoryStore();
+		this.route();
 		this.store.list(function(challenges) {
 			$('.challenge-list').html(app.liTemplate(challenges));
 		});
 	}
 };
-
 app.initialize();
-app.liTemplate = Handlebars.compile($("#challenge-li-tpl").html());
+app.liTemplate = Handlebars.compile($("#challenge-list-tpl").html());
+function onClick (id) {
+	app.route(id);
+}
+
+
 
