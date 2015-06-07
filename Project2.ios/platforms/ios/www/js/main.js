@@ -40,12 +40,12 @@ var app = {  // main app navigates and readys the app content.
 		}else{
 			var Challenge = Parse.Object.extend("Challenge");
 			var query = new Parse.Query(Challenge);
-			query.equalTo("num", id);
+			query.equalTo("num", id.toString());
 			query.find({
 			  success: function(results) {
 				for (var i = 0; i < results.length; i++) { 
 				  var object = results[i];
-				  self.slidePage(new ChallengeDetails(object.get('Name')).render());
+				  self.slidePage(new ChallengeDetails().render());
 				  $( ".date-input-css" ).datepicker();
 				}
 			  },
@@ -95,9 +95,7 @@ var app = {  // main app navigates and readys the app content.
 	},
 	initialize: function() {
 		var self = this;
-		Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3tQ4ACY2XrJIdmJA91grNHrs");
 		this.registerEvents();
-		this.route();
 		var Challenge = Parse.Object.extend("Challenge");
 		var Challenges = Parse.Collection.extend({
 			model: Challenge
@@ -110,6 +108,9 @@ var app = {  // main app navigates and readys the app content.
 			error: function(challenges, error) {
 				console.log(error);
 			}
+		});
+		this.store.list(function(challenges) {
+			$('.challenge-list').html(app.liTemplate(challenges));
 		});
 	}
 };

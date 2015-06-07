@@ -41,6 +41,16 @@
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		B9219271D72D46858C7304BC /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0521751B584B8586A370CA /* DatePicker.m */; };
 		990341FA175D44FCA1034369 /* DatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2849ADDAB59D486C821CCC80 /* DatePicker.xib */; };
+		C7D020A74B8C4E4AB1945A9F /* CDVParsePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 35AC0363E32248AC9D155DB8 /* CDVParsePlugin.m */; };
+		DC18AF9F3DBE4FD1AAF4BF6D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B77D6E25A940CF97417ED6 /* Parse.framework */; };
+		88F1485A2679423A93B9EC44 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E2E808F3CD64015B2C1106D /* AudioToolbox.framework */; };
+		E1BD963C5F554FFA9BF16BCC /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FEF16EF404428F9D4DC219 /* CFNetwork.framework */; };
+		CD0BBBA4DEE044118A09A50F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3113B772457F41DC86ACD64D /* CoreLocation.framework */; };
+		3978FFBADF0344CDB2ACFEA3 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FB045801957D458FA7819B54 /* libz.1.1.3.dylib */; };
+		D527D743FFF54734B5C53381 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C512CE382DA4277B5B9E821 /* QuartzCore.framework */; };
+		28F82D019A8F4407887FC3A1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD27901DBF5242CF9F457ED1 /* Security.framework */; };
+		DF87524EB80547C9B048C579 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6233588063F64D57AD7548F2 /* StoreKit.framework */; };
+		E914467963744042A823B194 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E22AEB11BCB240F0BBEF269F /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +119,17 @@
 		3A0521751B584B8586A370CA /* DatePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "DatePicker.m"; path = "com.sharinglabs.cordova.plugin.datepicker/DatePicker.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		39542DB05BB747468A4B6FD1 /* DatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "DatePicker.h"; path = "com.sharinglabs.cordova.plugin.datepicker/DatePicker.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		2849ADDAB59D486C821CCC80 /* DatePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "DatePicker.xib"; path = "DatePicker.xib"; sourceTree = "<group>"; fileEncoding = 4; };
+		35AC0363E32248AC9D155DB8 /* CDVParsePlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVParsePlugin.m"; path = "org.apache.cordova.core.parseplugin/CDVParsePlugin.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		5E08417AAE9F497983AD7A0C /* CDVParsePlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVParsePlugin.h"; path = "org.apache.cordova.core.parseplugin/CDVParsePlugin.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		26B77D6E25A940CF97417ED6 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Parse.framework"; path = "Project1/Plugins/org.apache.cordova.core.parseplugin/Parse.framework"; sourceTree = "<group>"; };
+		9E2E808F3CD64015B2C1106D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "AudioToolbox.framework"; path = "System/Library/Frameworks/AudioToolbox.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		20FEF16EF404428F9D4DC219 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "CFNetwork.framework"; path = "System/Library/Frameworks/CFNetwork.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		3113B772457F41DC86ACD64D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		FB045801957D458FA7819B54 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libz.1.1.3.dylib"; path = "usr/lib/libz.1.1.3.dylib"; sourceTree = SDKROOT; fileEncoding = 4; };
+		6C512CE382DA4277B5B9E821 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "QuartzCore.framework"; path = "System/Library/Frameworks/QuartzCore.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		BD27901DBF5242CF9F457ED1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Security.framework"; path = "System/Library/Frameworks/Security.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		6233588063F64D57AD7548F2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "StoreKit.framework"; path = "System/Library/Frameworks/StoreKit.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		E22AEB11BCB240F0BBEF269F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +141,15 @@
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
+				DC18AF9F3DBE4FD1AAF4BF6D /* Parse.framework in Frameworks */,
+				88F1485A2679423A93B9EC44 /* AudioToolbox.framework in Frameworks */,
+				E1BD963C5F554FFA9BF16BCC /* CFNetwork.framework in Frameworks */,
+				CD0BBBA4DEE044118A09A50F /* CoreLocation.framework in Frameworks */,
+				3978FFBADF0344CDB2ACFEA3 /* libz.1.1.3.dylib in Frameworks */,
+				D527D743FFF54734B5C53381 /* QuartzCore.framework in Frameworks */,
+				28F82D019A8F4407887FC3A1 /* Security.framework in Frameworks */,
+				DF87524EB80547C9B048C579 /* StoreKit.framework in Frameworks */,
+				E914467963744042A823B194 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +223,15 @@
 				5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
+				26B77D6E25A940CF97417ED6 /* Parse.framework */,
+				9E2E808F3CD64015B2C1106D /* AudioToolbox.framework */,
+				20FEF16EF404428F9D4DC219 /* CFNetwork.framework */,
+				3113B772457F41DC86ACD64D /* CoreLocation.framework */,
+				FB045801957D458FA7819B54 /* libz.1.1.3.dylib */,
+				6C512CE382DA4277B5B9E821 /* QuartzCore.framework */,
+				BD27901DBF5242CF9F457ED1 /* Security.framework */,
+				6233588063F64D57AD7548F2 /* StoreKit.framework */,
+				E22AEB11BCB240F0BBEF269F /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -210,6 +249,8 @@
 			children = (
 				3A0521751B584B8586A370CA /* DatePicker.m */,
 				39542DB05BB747468A4B6FD1 /* DatePicker.h */,
+				35AC0363E32248AC9D155DB8 /* CDVParsePlugin.m */,
+				5E08417AAE9F497983AD7A0C /* CDVParsePlugin.h */,
 			);
 			name = Plugins;
 			path = "Project1/Plugins";
@@ -396,6 +437,7 @@
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				B9219271D72D46858C7304BC /* DatePicker.m in Sources */,
+				C7D020A74B8C4E4AB1945A9F /* CDVParsePlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +480,10 @@
 				);
 				PRODUCT_NAME = "Project1";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"Project1/Plugins/org.apache.cordova.core.parseplugin\"",
+				);
 			};
 			name = Debug;
 		};
@@ -467,6 +513,10 @@
 				);
 				PRODUCT_NAME = "Project1";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"Project1/Plugins/org.apache.cordova.core.parseplugin\"",
+				);
 			};
 			name = Release;
 		};

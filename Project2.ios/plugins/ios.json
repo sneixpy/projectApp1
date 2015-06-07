@@ -11,6 +11,74 @@
                         {
                             "xml": "<feature name=\"DatePicker\"><param name=\"ios-package\" value=\"DatePicker\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"ParsePlugin\"><param name=\"ios-package\" value=\"CDVParsePlugin\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "framework": {
+                "parents": {
+                    "AudioToolbox.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "CFNetwork.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "CoreGraphics.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "CoreLocation.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "libz.1.1.3.dylib": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "MobileCoreServices.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "QuartzCore.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "Security.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "StoreKit.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "SystemConfiguration.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
                         }
                     ]
                 }
@@ -22,6 +90,9 @@
             "PACKAGE_NAME": "com.phonegap.project1"
         },
         "com.sharinglabs.cordova.plugin.datepicker": {
+            "PACKAGE_NAME": "com.phonegap.project1"
+        },
+        "org.apache.cordova.core.parseplugin": {
             "PACKAGE_NAME": "com.phonegap.project1"
         }
     },

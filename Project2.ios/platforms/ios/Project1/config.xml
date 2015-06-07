@@ -90,4 +90,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <preference name="CameraUsesGeolocation" value="true" />
+    <feature name="ParsePlugin">
+        <param name="ios-package" value="CDVParsePlugin" />
+    </feature>
 </widget>
