@@ -95,7 +95,10 @@ var app = {  // main app navigates and readys the app content.
 	},
 	initialize: function() {
 		var self = this;
+		console.log("Start");
+		this.route();
 		this.registerEvents();
+		console.log("1stStep"); 
 		var Challenge = Parse.Object.extend("Challenge");
 		var Challenges = Parse.Collection.extend({
 			model: Challenge
@@ -103,15 +106,15 @@ var app = {  // main app navigates and readys the app content.
 		var challenges = new Challenges();
 		challenges.fetch({
 			success: function(challenges) {
+			console.log("heleodod");
 				$('.challenge-list').html(app.liTemplate(challenges.toJSON()));
+				console.log("2sdfhasdhf");
 			},
 			error: function(challenges, error) {
 				console.log(error);
 			}
 		});
-		this.store.list(function(challenges) {
-			$('.challenge-list').html(app.liTemplate(challenges));
-		});
+		
 	}
 };
 app.initialize();

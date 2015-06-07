@@ -97,7 +97,6 @@ var app = {  // main app navigates and readys the app content.
 		var self = this;
 		this.route();
 		this.registerEvents();
-		
 		var Challenge = Parse.Object.extend("Challenge");
 		var Challenges = Parse.Collection.extend({
 			model: Challenge

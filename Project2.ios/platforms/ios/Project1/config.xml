@@ -6,6 +6,9 @@
     <feature name="DatePicker">
         <param name="ios-package" value="DatePicker" />
     </feature>
+    <feature name="ParsePlugin">
+        <param name="ios-package" value="CDVParsePlugin" />
+    </feature>
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
     <name>Project1</name>
@@ -90,7 +93,4 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <preference name="CameraUsesGeolocation" value="true" />
-    <feature name="ParsePlugin">
-        <param name="ios-package" value="CDVParsePlugin" />
-    </feature>
 </widget>
