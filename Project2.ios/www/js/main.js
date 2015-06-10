@@ -27,9 +27,9 @@ var app = {  // main app navigates and readys the app content.
 			});
 		}
 	},
-	route: function(id) {  // Function to navigate all to all different pages
+	route: function(page,id) {  // Function to navigate all to all different pages
 		var self = this;
-		if (!id) {
+		if (!page) {
 			if (this.homePage) {
 				this.slidePage(this.homePage);
 			} else {
@@ -37,22 +37,9 @@ var app = {  // main app navigates and readys the app content.
 				this.slidePage(this.homePage);
 			}
 			return;
-		}else{
-			var Challenge = Parse.Object.extend("Challenge");
-			var query = new Parse.Query(Challenge);
-			query.equalTo("num", id.toString());
-			query.find({
-			  success: function(results) {
-				for (var i = 0; i < results.length; i++) { 
-				  var object = results[i];
-				  self.slidePage(new ChallengeDetails().render());
-				  $( ".date-input-css" ).datepicker();
-				}
-			  },
-			  error: function(error) {
-				alert("Error: " + error.code + " " + error.message);
-			  }
-			});
+		}else if (page = "challenge"){
+			var CD = new ChallengeDetails();
+			self.slidePage(CD.render(CD.initialize(id)));
 		}
 	},
 	slidePage: function(page) {
@@ -115,8 +102,8 @@ var app = {  // main app navigates and readys the app content.
 };
 app.initialize();
 app.liTemplate = Handlebars.compile($("#challenge-list-tpl").html());
-function onClick (id) {
-	app.route(id);
+function onClickList (id) {
+	app.route('challenge',id);
 }
 
 

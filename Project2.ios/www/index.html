@@ -22,7 +22,7 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 </script>
 <script id="challenge-list-tpl" type="text/x-handlebars-template">
     {{#.}}
-    <li><a class="hashExLink" onclick="onClick({{this.num}});">{{this.Name}}<br/></a></li>
+    <li><a class="hashExLink" onclick="onClickList({{this.num}});">{{this.Name}}<br/></a></li>
     {{/.}}
 </script>
 <script id="challenge-who-tpl" type="text/x-handlebars-template">
@@ -33,7 +33,7 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 
 <script id="challenge-details-tpl" type="text/x-handlebars-template">
     <div class='details'>
-		<div><h1 class="heading">Parameters</h1></div>
+		<div><h1 class="heading"> Param= {{Name}} = {{num}} =eters</h1></div>
 		<div class="ui-field-contain">
 			<label for="select-native-2">Mini sized:</label>
 			<select name="select-native-2" id="select-native-2" data-mini="true">
@@ -46,6 +46,7 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 		<div><p>Choose Start date:</p><input type="date" min="2015-01-01"></div>
 		<div><p>Choose End date:</p><input type="date" max="2016-01-01"></div>
 		<div><p>Ratio</p><input type="number" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></div>
+		<div><button>Submit</button></div>
     </div>
 </script>
 
