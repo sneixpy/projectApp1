@@ -85,7 +85,6 @@ var app = {  // main app navigates and readys the app content.
 			// Slide in the new page
 			$(page.el).attr('class', 'page stage-center transition');
 			self.currentPage = page;
-			$('body').trigger('create');
 		});
 		
 	},

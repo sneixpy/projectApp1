@@ -62,11 +62,11 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 
 </script>
 
-<script id="challenge-list-tpl" type="text/x-handlebars-template"> <!--<li><a class="hashExLink" onclick="onClickList({{this.num}});">{{this.Name}}<br/></a></li>-->
+<script id="challenge-list-tpl" type="text/x-handlebars-template">
     {{#.}}
 	<div data-role="collapsible">
 		<h3>{{this.Name}}</h3>
-		<form id="thing_{{this.num}}" class="ui-mini">
+		<form id="thing_{{this.num}}">
 			<div class="ui-field-contain" id="theme-selector">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<p>Theme:</p>
@@ -78,7 +78,7 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 			</div>
 			<div><p>Choose Start date:</p><input type="date" min="2015-01-01"></div>
 			<div><p>Choose End date:</p><input type="date" max="2016-01-01"></div>
-			<div><button>Next</button></div>
+			<div><button class="ui-btn ui-corner-all ui-shadow">NEXT</button></div>
 		</form>
 	</div>
     {{/.}}
