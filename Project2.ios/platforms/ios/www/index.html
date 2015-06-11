@@ -36,19 +36,6 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 		</div>
 	
 	<!-- /content -->
-	
-	<!--
-	<div data-role="footer" data-position="fixed">
-		<div data-role="navbar">
-			<ul>
-				<li><a href="#">Menu item 1</a></li>
-				<li><a href="#" class="ui-btn-active ui-state-persist">Menu item 2</a></li>
-				<li><a href="#">Menu item 3</a></li>
-			</ul>
-		</div>
-		<h4 style="display:none;">Footer</h4>
-	</div>
-	-->
 	<div data-role="panel" id="panel-overlay" data-display="overlay">
 		<ul data-role="listview">
 			<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
@@ -67,13 +54,13 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 	<div data-role="collapsible">
 		<h3>{{this.Name}}</h3>
 		<form id="thing_{{this.num}}">
-			<div class="ui-field-contain" id="theme-selector">
+			<div>
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<p>Theme:</p>
-					<label for="a">A</label>
-					<input type="radio" name="theme" id="a" checked>
-					<label for="b">B</label>
-					<input type="radio" name="theme" id="b">
+					<label for="a_{{this.num}}">A</label>
+					<input type="radio" name="theme" id="a_{{this.num}}" checked>
+					<label for="b_{{this.num}}">B</label>
+					<input type="radio" name="theme" id="b_{{this.num}}">
 				</fieldset>
 			</div>
 			<div><p>Choose Start date:</p><input type="date" min="2015-01-01"></div>

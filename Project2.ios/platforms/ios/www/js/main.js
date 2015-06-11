@@ -85,6 +85,7 @@ var app = {  // main app navigates and readys the app content.
 			// Slide in the new page
 			$(page.el).attr('class', 'page stage-center transition');
 			self.currentPage = page;
+			$('body').trigger('create');
 		});
 		
 	},
@@ -97,16 +98,17 @@ var app = {  // main app navigates and readys the app content.
 			model: Challenge
 		});
 		var challenges = new Challenges();
-		challenges.fetch({
-			success: function(challenges) {
-				$('.challenge-list').html(app.liTemplate(challenges.toJSON()));
-				$('body').trigger('create');
-			},
-			error: function(challenges, error) {
-				console.log(error);
-			}
+		setTimeout(function() {
+			challenges.fetch({
+				success: function() {
+					$('.challenge-list').html(app.liTemplate(challenges.toJSON()));
+					$('body').trigger('create');
+				},
+				error: function(challenges, error) {
+					console.log(error);
+				}
+			});
 		});
-		
 	}
 };
 app.initialize();

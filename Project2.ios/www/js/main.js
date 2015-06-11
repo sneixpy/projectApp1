@@ -98,15 +98,36 @@ var app = {  // main app navigates and readys the app content.
 		});
 		var challenges = new Challenges();
 		challenges.fetch({
-			success: function(challenges) {
+			success: function() {
 				$('.challenge-list').html(app.liTemplate(challenges.toJSON()));
+				$(" .chooseDates").each(function( i, cD ) {
+					var Num = cD.id.split("_")[1];
+					$('#'+cD.id).datepicker({
+						beforeShowDay: function(date) {
+							var date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input1_"+Num).val());
+							var date2 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input2_"+Num).val());
+							return [true, date1 && ((date.getTime() == date1.getTime()) || (date2 && date >= date1 && date <= date2)) ? "dp-highlight" : ""];
+						},
+						onSelect: function(dateText, inst) {
+							var date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input1_"+Num).val());
+							var date2 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input2_"+Num).val());
+							if (!date1 || date2) {
+								$("#input1_"+Num).val(dateText);
+								$("#input2_"+Num).val("");
+								$(this).datepicker("option", "minDate", dateText);
+							} else {
+								$("#input2_"+Num).val(dateText);
+								$(this).datepicker("option", "minDate", null);
+							}
+						}
+					});
+				});
 				$('body').trigger('create');
 			},
 			error: function(challenges, error) {
 				console.log(error);
 			}
 		});
-		
 	}
 };
 app.initialize();

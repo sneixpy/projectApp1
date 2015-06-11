@@ -2,16 +2,18 @@
 <script src="css/source-sans-pro.js"></script>
 <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-darkness/jquery-ui.css" />
 <link href="css/styles.css" rel="stylesheet">
-<link rel="stylesheet" href="css/jquery.mobile.datepicker.css" />
-<link rel="stylesheet" href="css/jquery.mobile.datepicker.theme.css" />
+<!--<link rel="stylesheet" href="css/jquery.mobile.datepicker.css" />
+<link rel="stylesheet" href="css/jquery.mobile.datepicker.theme.css" />-->
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3tQ4ACY2XrJIdmJA91grNHrs");
 </script>
-<script src="js/external/jquery-ui/datepicker.js"></script>
-<script src="js/jquery.mobile.datepicker.js"></script>
+<!--<script src="js/external/jquery-ui/datepicker.js"></script>
+<script src="js/jquery.mobile.datepicker.js"></script>-->
 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 
 
@@ -36,19 +38,6 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 		</div>
 	
 	<!-- /content -->
-	
-	<!--
-	<div data-role="footer" data-position="fixed">
-		<div data-role="navbar">
-			<ul>
-				<li><a href="#">Menu item 1</a></li>
-				<li><a href="#" class="ui-btn-active ui-state-persist">Menu item 2</a></li>
-				<li><a href="#">Menu item 3</a></li>
-			</ul>
-		</div>
-		<h4 style="display:none;">Footer</h4>
-	</div>
-	-->
 	<div data-role="panel" id="panel-overlay" data-display="overlay">
 		<ul data-role="listview">
 			<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
@@ -67,18 +56,19 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 	<div data-role="collapsible">
 		<h3>{{this.Name}}</h3>
 		<form id="thing_{{this.num}}">
-			<div class="ui-field-contain" id="theme-selector">
+			<div>
 				<fieldset data-role="controlgroup" data-type="horizontal">
-					<p>Theme:</p>
-					<label for="a">A</label>
-					<input type="radio" name="theme" id="a" checked>
-					<label for="b">B</label>
-					<input type="radio" name="theme" id="b">
+					<label for="a_{{this.num}}">Miles</label>
+					<input type="radio" name="theme" id="a_{{this.num}}" checked>
+					<label for="b_{{this.num}}">Time</label>
+					<input type="radio" name="theme" id="b_{{this.num}}">
 				</fieldset>
 			</div>
-			<div><p>Choose Start date:</p><input type="date" min="2015-01-01"></div>
-			<div><p>Choose End date:</p><input type="date" max="2016-01-01"></div>
-			<div><button class="ui-btn ui-corner-all ui-shadow">NEXT</button></div>
+			
+			<div id="datepicker_{{this.num}}" class="chooseDates"></div>
+			<input type="hidden" id="input1_{{this.num}}" readonly="true" class="input1" size="10">
+			<input type="hidden" id="input2_{{this.num}}" readonly="true" class="input2" size="10">
+			<div class="ui-controlgroup-horizontal"><button class="ui-btn ui-corner-all ui-shadow">NEXT</button></div>
 		</form>
 	</div>
     {{/.}}
