@@ -38,9 +38,16 @@ var app = {  // main app navigates and readys the app content.
 			}
 			return;
 		}else if (page = "challenge"){
-			var CD = new ChallengeDetails();
-			CD.initialize(id);
-			self.slidePage(CD.render());
+			var CD = new ChallengeDetails(id);
+			/*
+			var url= "http://stmiconsulting.com/cgi-bin/APP/dataConnection.php?Type=getChallenges";
+			$.getJSON(url,function(data){
+				$.each(data.challenges, function(i,challenge){
+					alert(challenge.Name);
+				});
+				self.slidePage(CD.render(CD.initialize(id)));
+			});
+			*/
 		}
 	},
 	slidePage: function(page) {
@@ -78,8 +85,9 @@ var app = {  // main app navigates and readys the app content.
 			// Slide in the new page
 			$(page.el).attr('class', 'page stage-center transition');
 			self.currentPage = page;
+			$('body').trigger('create');
 		});
- 
+		
 	},
 	initialize: function() {
 		var self = this;
@@ -93,6 +101,7 @@ var app = {  // main app navigates and readys the app content.
 		challenges.fetch({
 			success: function(challenges) {
 				$('.challenge-list').html(app.liTemplate(challenges.toJSON()));
+				$('body').trigger('create');
 			},
 			error: function(challenges, error) {
 				console.log(error);

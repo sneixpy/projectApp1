@@ -1,4 +1,4 @@
-<html>
+<html class="ui-mobile">
 <script src="css/source-sans-pro.js"></script>
 <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
@@ -12,17 +12,75 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 </script>
 <script src="js/external/jquery-ui/datepicker.js"></script>
 <script src="js/jquery.mobile.datepicker.js"></script>
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 
 
-
-<body class="platform-ios platform-cordova platform-webview">
+<body class="ui-mobile-viewport ui-overlay-b platform-ios platform-cordova platform-webview">
 <script id="home-tpl" type="text/x-handlebars-template">
-    <div><h1 class="heading">Select a Challenge</h1></div>
-    <div class="scroll"><ul class='challenge-list'></ul></div>
+
+<div data-role="page" id="testpage" class="ui-page-theme-b">
+	<div data-role="header">
+		<h1>Select a Challenge</h1>
+		<a href="#panel-overlay" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Back</a>
+		<a href="#panel-overlay" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>
+	</div>
+	<!-- /header -->
+	<div role="main" class="ui-content">
+
+		<div style="margin-bottom:1em;" class="ui-body ui-body-b ui-corner-all" id="ui-body-test">
+
+		</div>
+		<div class="scroll">
+			<div data-content-theme="b" data-role="collapsibleset" class="challenge-list">
+			</div>
+		</div>
+	
+	<!-- /content -->
+	
+	<!--
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#">Menu item 1</a></li>
+				<li><a href="#" class="ui-btn-active ui-state-persist">Menu item 2</a></li>
+				<li><a href="#">Menu item 3</a></li>
+			</ul>
+		</div>
+		<h4 style="display:none;">Footer</h4>
+	</div>
+	-->
+	<div data-role="panel" id="panel-overlay" data-display="overlay">
+		<ul data-role="listview">
+			<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+			<li><a href="#">List item</a></li>
+			<li><a href="#">List item</a></li>
+			<li><a href="#">List item</a></li>
+		</ul>
+		<br><br>
+		<button class="ui-btn ui-corner-all ui-shadow">Button</button>
+	</div>
+
 </script>
-<script id="challenge-list-tpl" type="text/x-handlebars-template">
+
+<script id="challenge-list-tpl" type="text/x-handlebars-template"> <!--<li><a class="hashExLink" onclick="onClickList({{this.num}});">{{this.Name}}<br/></a></li>-->
     {{#.}}
-    <li><a class="hashExLink" onclick="onClickList({{this.num}});">{{this.Name}}<br/></a></li>
+	<div data-role="collapsible">
+		<h3>{{this.Name}}</h3>
+		<form id="thing_{{this.num}}" class="ui-mini">
+			<div class="ui-field-contain" id="theme-selector">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<p>Theme:</p>
+					<label for="a">A</label>
+					<input type="radio" name="theme" id="a" checked>
+					<label for="b">B</label>
+					<input type="radio" name="theme" id="b">
+				</fieldset>
+			</div>
+			<div><p>Choose Start date:</p><input type="date" min="2015-01-01"></div>
+			<div><p>Choose End date:</p><input type="date" max="2016-01-01"></div>
+			<div><button>Next</button></div>
+		</form>
+	</div>
     {{/.}}
 </script>
 <script id="challenge-who-tpl" type="text/x-handlebars-template">
@@ -31,54 +89,10 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
     </div>
 </script>
 
-<script id="challenge-details-tpl" type="text/x-handlebars-template">
-    <div class='details'>
-		<div><h1 class="heading"> Param= {{Name}} = {{num}} =eters</h1></div>
-		<div class="ui-field-contain">
-			<label for="select-native-2">Mini sized:</label>
-			<select name="select-native-2" id="select-native-2" data-mini="true">
-				<option value="1">Miles</option>
-				<option value="2">Time</option>
-			</select>
-		</div>
-		<!--<div><p>Choose Start date:</p><input type="text" readonly="true" class="date-input-css"></div>
-		<div><p>Choose End date:</p><input type="text" readonly="true" class="date-input-css"></div>-->
-		<div><p>Choose Start date:</p><input type="date" min="2015-01-01"></div>
-		<div><p>Choose End date:</p><input type="date" max="2016-01-01"></div>
-		<div><p>Ratio</p><input type="number" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></div>
-		<div><button>Submit</button></div>
-    </div>
-</script>
-
-<!--
-<script id="challenge-tpl" type="text/x-handlebars-template">
-    <div class='header'><a class="button header-button header-button-left" onclick="onClick();">Back</a><h1>Challenge Details</h1></div>
-    <div class='details'>
-        <img class='employee-image' src='img/{{firstName}}_{{lastName}}.jpg' />
-        <h1>{{Name}}</h1>
-        <span class="location"></span>
-		<div class='search-bar'><input class='search-key' type="search" autocorrect="off" autocapitalize="off"/></div>
-        <ul>
-            <li><a href="tel:{{officePhone}}">Call Office<br/>{{officePhone}}</a></li>
-            <li><a href="tel:{{cellPhone}}">Call Cell<br/>{{cellPhone}}</a></li>
-            <li><a href="sms:{{cellPhone}}">SMS<br/>{{cellPhone}}</a></li>
-            <li><a href="#" class="add-location-btn">Add Location</a></li>
-            <li><a href="#" class="add-contact-btn">Add to Contacts</a></li>
-            <li><a href="#" class="change-pic-btn">Change Picture</a></li>
-        </ul>
-    </div>
-</script>-->
-
-<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 <script src="lib/handlebars.js"></script>
-<!--<script src="lib/jquery-1.8.2.min.js"></script>-->
-
 <script src="js/HomeView.js"></script>
 <script src="js/ChallengeDetails.js"></script>
 <script src="js/storage/memory-store.js"></script>
 <script src="js/main.js"></script>
-
-<script src="phonegap.js"></script>
-
 </body>
 </html>
