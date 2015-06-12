@@ -3,6 +3,12 @@
     font-size: .9em;
     line-height: .9em;
 }
+.ui-loader .ui-icon-loading {
+    display: none;
+}
+.ui-mobile .ui-page {
+    min-height: 100%;
+}
 .ui-mobile label, div.ui-controlgroup-label {
     font-size: 12px;
 }
@@ -28,4 +34,28 @@
     margin-top: 4px;
     margin-left: -8px;
     position: relative;
+}
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-transform:translate3d(0,0,0);
+}
+.stage-center {
+    top: 0;
+    left: 0;
+}
+ 
+.stage-left {
+    left: -100%;
+}
+ 
+.stage-right {
+    left: 100%;
+}
+ 
+.transition {
+    -moz-transition-duration: .375s;
+    -webkit-transition-duration: .375s;
+    -o-transition-duration: .375s;
 }

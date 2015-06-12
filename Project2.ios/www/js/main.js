@@ -94,7 +94,7 @@
 		challenges.fetch({
 			success: function() {
 				$('.challenge-list').html(app.liTemplate(challenges.toJSON()));
-				$(" .chooseDates").each(function( i, cD ) {
+				$(' .chooseDates').each(function( i, cD ) {
 					var Num = cD.id.split("_")[1];
 					$('#'+cD.id).datepicker({
 						minDate: 0,

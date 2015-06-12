@@ -5,10 +5,11 @@
 var ChallengeWho = function(ChallengeID) {
  
 	this.render = function() {
-		//this.el.html(ChallengeWho.template());
-		$('body').html(ChallengeWho.template());
-		//app.slidePage(this);
-		//$('body').trigger('create');
+		this.el.html(ChallengeWho.template());
+		//$('body').html(ChallengeWho.template());
+		app.slidePage(this);
+		$('body').trigger('create');
+		$('.ui-page-theme-b').css("display","block");
 	};
 	
 	this.searchContacts = function(event) {
@@ -22,19 +23,13 @@ var ChallengeWho = function(ChallengeID) {
 			options.filter=$('.search-key').val(); // empty search string returns all
 			options.multiple=true;    // return multiple results
 		var filter = ["name"]; // return contact.displayName field
-//console.log('searchContacts4');
-			// find contacts
 		navigator.contacts.find(filter, onSuccess, onError, options);
-//console.log('searchContacts2');
 		return false;
 	};
 
     this.initialize = function() {
         this.el = $('<div/>');
 		var self = this;
-        //this.el.on('click', '.add-location-btn', this.addLocation);
-        //this.el.on('click', '.add-contact-btn', this.addToContacts);
-        //this.el.on('click', '.change-pic-btn', this.changePicture);
 		this.el.on('keyup', '.search-key', this.searchContacts);
 		self.render();
     };
@@ -44,11 +39,20 @@ var ChallengeWho = function(ChallengeID) {
  }
  
  function onSuccess(contacts) {
+ /*
+ [ { value: 'davidasao@gmail.com', pref: false, id: 0, type: 'home' },
+  { value: 'davidasao@yahoo.com', pref: false, id: 1, type: 'work' },
+  { value: 'david.asao@hl.konicaminolta.us',
+    pref: false,
+    id: 2,
+    type: 'other' },
+  { value: 'david@stmiconsulting.com',
+    pref: false,
+    id: 3,
+    type: 'other' } ]
+ */
 	for (var i=0; i<contacts.length; i++) {
-		//console.log('searchContacts2.7');
 		if (contacts[i].emails) {
-		console.log(contacts[i].name.formatted);
-		console.log(contacts[i].emails);
 		}
 	}
 }
