@@ -1,25 +1,20 @@
-<html class="ui-mobile">
+﻿<html class="ui-mobile">
 <script src="css/source-sans-pro.js"></script>
 <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-darkness/jquery-ui.css" />
-<link href="css/styles.css" rel="stylesheet">
-<!--<link rel="stylesheet" href="css/jquery.mobile.datepicker.css" />
-<link rel="stylesheet" href="css/jquery.mobile.datepicker.theme.css" />-->
+<link rel="stylesheet" href="css/styles.css" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3tQ4ACY2XrJIdmJA91grNHrs");
 </script>
-<!--<script src="js/external/jquery-ui/datepicker.js"></script>
-<script src="js/jquery.mobile.datepicker.js"></script>-->
 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 
 
 <body class="ui-mobile-viewport ui-overlay-b">
 <script id="home-tpl" type="text/x-handlebars-template">
-
 <div data-role="page" id="testpage" class="ui-page-theme-b">
 	<div data-role="header">
 		<h1>Select a Challenge</h1>
@@ -38,17 +33,18 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 		</div>
 	
 	<!-- /content -->
-	<div data-role="panel" id="panel-overlay" data-display="overlay">
-		<ul data-role="listview">
-			<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
-			<li><a href="#">List item</a></li>
-			<li><a href="#">List item</a></li>
-			<li><a href="#">List item</a></li>
-		</ul>
-		<br><br>
-		<button class="ui-btn ui-corner-all ui-shadow">Button</button>
+		<div data-role="panel" id="panel-overlay" data-display="overlay">
+			<ul data-role="listview">
+				<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+				<li><a href="#">List item</a></li>
+				<li><a href="#">List item</a></li>
+				<li><a href="#">List item</a></li>
+			</ul>
+			<br><br>
+			<button class="ui-btn ui-corner-all ui-shadow">Button</button>
+		</div>
 	</div>
-
+</div>
 </script>
 
 <script id="challenge-list-tpl" type="text/x-handlebars-template">
@@ -68,20 +64,44 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 			<div id="datepicker_{{this.num}}" class="chooseDates"></div>
 			<input type="hidden" id="input1_{{this.num}}" readonly="true" class="input1" size="10">
 			<input type="hidden" id="input2_{{this.num}}" readonly="true" class="input2" size="10">
-			<div class="ui-controlgroup-horizontal"><button class="ui-btn ui-corner-all ui-shadow">NEXT</button></div>
+			<div class="ui-controlgroup-horizontal"><button class="ui-btn ui-corner-all ui-shadow" onclick="onChooseChallenger({{this.num}});">Select Challengers</button></div>
 		</form>
 	</div>
     {{/.}}
 </script>
 <script id="challenge-who-tpl" type="text/x-handlebars-template">
-    <div class='search'>
+<div data-role="page" id="testpage" class="ui-page-theme-b">
+	<div data-role="header">
+		<h1>Find a Challenger</h1>
+		<a href="#panel-overlay" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Back</a>
+		<a href="#panel-overlay" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>
+	</div>
+	<!-- /header -->
+	<div role="main" class="ui-content">
 		<div class='search-bar'><input class='search-key' type="search" autocorrect="off" autocapitalize="off"/></div>
-    </div>
+		<div style="margin-bottom:1em;" class="ui-body ui-body-b ui-corner-all" id="ui-body-test">
+
+		</div>
+	
+	<!-- /content -->
+		<div data-role="panel" id="panel-overlay" data-display="overlay">
+			<ul data-role="listview">
+				<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+				<li><a href="#">List item</a></li>
+				<li><a href="#">List item</a></li>
+				<li><a href="#">List item</a></li>
+			</ul>
+			<br><br>
+			<button class="ui-btn ui-corner-all ui-shadow">Button</button>
+		</div>
+	</div>
+</div>
 </script>
 
 <script src="lib/handlebars.js"></script>
 <script src="js/HomeView.js"></script>
 <script src="js/ChallengeDetails.js"></script>
+<script src="js/ChallengeWho.js"></script>
 <script src="js/storage/memory-store.js"></script>
 <script src="js/main.js"></script>
 </body>

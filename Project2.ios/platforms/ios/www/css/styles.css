@@ -1,5 +1,31 @@
-body, input, select, textarea, button, .ui-btn {
+﻿body, input, select, textarea, button, .ui-btn {
     font-family: sans-serif;
-    font-size: .8em;
-    line-height: 0;
+    font-size: .9em;
+    line-height: .9em;
+}
+.ui-mobile label, div.ui-controlgroup-label {
+    font-size: 12px;
+}
+.ui-controlgroup-horizontal .ui-controlgroup-controls {
+    display: flex;
+}
+.ui-checkbox .ui-btn, .ui-radio .ui-btn {
+    margin: -1px 0 0;
+    z-index: 1;
+}
+.ui-controlgroup, fieldset.ui-controlgroup {
+    margin: 0 0;
+    padding: 0;
+}
+.ui-checkbox input, .ui-radio input {
+    z-index: 0;
+}
+.dp-highlight .ui-state-default {
+	background: #484;
+	color: #FFF;
+}
+.ui-datepicker {
+    margin-top: 4px;
+    margin-left: -8px;
+    position: relative;
 }

@@ -1,4 +1,4 @@
-var app = {  // main app navigates and readys the app content.
+﻿var app = {  // main app navigates and readys the app content.
 	showAlert: function (message, title) {
 		if (navigator.notification) {
 			navigator.notification.alert(message, null, title, 'OK');
@@ -37,17 +37,10 @@ var app = {  // main app navigates and readys the app content.
 				this.slidePage(this.homePage);
 			}
 			return;
-		}else if (page = "challenge"){
+		}else if (page == "challenge"){
 			var CD = new ChallengeDetails(id);
-			/*
-			var url= "http://stmiconsulting.com/cgi-bin/APP/dataConnection.php?Type=getChallenges";
-			$.getJSON(url,function(data){
-				$.each(data.challenges, function(i,challenge){
-					alert(challenge.Name);
-				});
-				self.slidePage(CD.render(CD.initialize(id)));
-			});
-			*/
+		}else if (page == "chooseChallenger"){
+			var CW = new ChallengeWho(id);
 		}
 	},
 	slidePage: function(page) {
@@ -85,6 +78,7 @@ var app = {  // main app navigates and readys the app content.
 			// Slide in the new page
 			$(page.el).attr('class', 'page stage-center transition');
 			self.currentPage = page;
+			//$('body').trigger('create');
 		});
 		
 	},
@@ -103,6 +97,7 @@ var app = {  // main app navigates and readys the app content.
 				$(" .chooseDates").each(function( i, cD ) {
 					var Num = cD.id.split("_")[1];
 					$('#'+cD.id).datepicker({
+						minDate: 0,
 						beforeShowDay: function(date) {
 							var date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input1_"+Num).val());
 							var date2 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input2_"+Num).val());
@@ -117,7 +112,7 @@ var app = {  // main app navigates and readys the app content.
 								$(this).datepicker("option", "minDate", dateText);
 							} else {
 								$("#input2_"+Num).val(dateText);
-								$(this).datepicker("option", "minDate", null);
+								$(this).datepicker("option", "minDate", 0);
 							}
 						}
 					});
@@ -134,6 +129,9 @@ app.initialize();
 app.liTemplate = Handlebars.compile($("#challenge-list-tpl").html());
 function onClickList (id) {
 	app.route('challenge',id);
+}
+function onChooseChallenger (ChallengeID) {
+	app.route('chooseChallenger',ChallengeID);
 }
 
 
