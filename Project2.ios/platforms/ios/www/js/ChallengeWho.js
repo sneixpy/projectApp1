@@ -13,7 +13,7 @@ var ChallengeWho = function(ChallengeID) {
 	};
 	
 	this.searchContacts = function(event) {
-		event.preventDefault();
+		if (event) event.preventDefault();
 		//console.log('searchContacts');
 		if (!navigator.contacts) {
 			app.showAlert("Contacts API not supported", "Error");
@@ -32,13 +32,14 @@ var ChallengeWho = function(ChallengeID) {
 		var self = this;
 		this.el.on('keyup', '.search-key', this.searchContacts);
 		self.render();
+		this.searchContacts();
     };
  
     this.initialize();
  
  }
  
- function onSuccess(contacts) {
+function onSuccess(contacts) {
  /*
  [ { value: 'davidasao@gmail.com', pref: false, id: 0, type: 'home' },
   { value: 'davidasao@yahoo.com', pref: false, id: 1, type: 'work' },
@@ -51,17 +52,28 @@ var ChallengeWho = function(ChallengeID) {
     id: 3,
     type: 'other' } ]
  */
-	for (var i=0; i<contacts.length; i++) {
+ 	var tempObj = new Array();
+ 	var t=0;
+ 	var i=0;
+	for (t=0,i=0; i<contacts.length; i++) {
 		if (contacts[i].emails) {
+			var tmp = [];
+			for (var j=0; j<contacts[i].emails.length; j++) {
+				tmp.push({'Id': contacts[i].emails[j].id,'Email': contacts[i].emails[j].value});
+			}
+			tempObj[t] = {'id':contacts[i].id, 'Name':contacts[i].name.formatted, 'Emails': tmp};
+			t++;
 		}
 	}
+	$('.contact-list').html(ChallengeWho.ContactList(tempObj));
+	$('.contact-list').trigger('create');
 }
 function onError(contactError) {
 	console.log('onError!');
 }
 
 ChallengeWho.template = Handlebars.compile($("#challenge-who-tpl").html());
-
+ChallengeWho.ContactList = Handlebars.compile($("#contact-list-tpl").html());
 
 
 
