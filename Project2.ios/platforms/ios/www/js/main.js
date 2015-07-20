@@ -29,19 +29,25 @@
 	},
 	route: function(page,id) {  // Function to navigate all to all different pages
 		var self = this;
-		if (!page) {
-			if (this.homePage) {
-				this.slidePage(this.homePage);
-			} else {
-				this.homePage = new HomeView().render();
-				this.slidePage(this.homePage);
+		if (page == 'HomeView' || !page) {
+			if (this.homeView){
+				this.homePage=true;
+				this.slidePage(this.homeView.reRender());
+			}else{
+				this.homeView = new HomeView();
+				this.slidePage(this.homeView.render());
 			}
-			return;
-		}else if (page == "challenge"){
-			var CD = new ChallengeDetails(id);
 		}else if (page == "chooseChallenger"){
-			var CW = new ChallengeWho(id);
+			if (this.challengeWho){
+				this.slidePage(this.challengeWho.reRender());
+			}else{
+				this.challengeWho = new ChallengeWho(id);
+				this.slidePage(this.challengeWho.render());
+			}
 		}
+		//else if (page == "challenge"){
+		//	var CD = new ChallengeDetails(id);
+		return;
 	},
 	slidePage: function(page) {
  
@@ -55,11 +61,11 @@
 			this.currentPage = page;
 			return;
 		}
- 
 		// Cleaning up: remove old pages that were moved out of the viewport
-		$('.stage-right, .stage-left').not('.homePage').remove();
- 
-		if (page === app.homePage) {
+		$('.stage-right, .stage-left, .stage-center').remove();
+		//$('.stage-right, .stage-left').not('.homePage').remove();
+		
+		if (app.homePage) {
 			// Always apply a Back transition (slide from left) when we go back to the search page
 			$(page.el).attr('class', 'page stage-left');
 			currentPageDest = "stage-right";
@@ -68,9 +74,12 @@
 			$(page.el).attr('class', 'page stage-right');
 			currentPageDest = "stage-left";
 		}
- 
+		this.currentPage = page;
 		$('body').append(page.el);
- 
+		$('body').trigger('create');
+		$('.page').css("display","block");
+		$('.ui-page').css("display","block");
+
 		// Wait until the new page has been added to the DOM...
 		setTimeout(function() {
 			// Slide out the current page: If new page slides from the right -> slide current page to the left, and vice versa
@@ -78,60 +87,25 @@
 			// Slide in the new page
 			$(page.el).attr('class', 'page stage-center transition');
 			self.currentPage = page;
-			//$('body').trigger('create');
 		});
-		
+
 	},
 	initialize: function() {
 		var self = this;
 		this.route();
 		this.registerEvents();
-		var Challenge = Parse.Object.extend("Challenge");
-		var Challenges = Parse.Collection.extend({
-			model: Challenge
-		});
-		var challenges = new Challenges();
-		challenges.fetch({
-			success: function() {
-				$('.challenge-list').html(app.liTemplate(challenges.toJSON()));
-				$(' .chooseDates').each(function( i, cD ) {
-					var Num = cD.id.split("_")[1];
-					$('#'+cD.id).datepicker({
-						minDate: 0,
-						beforeShowDay: function(date) {
-							var date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input1_"+Num).val());
-							var date2 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input2_"+Num).val());
-							return [true, date1 && ((date.getTime() == date1.getTime()) || (date2 && date >= date1 && date <= date2)) ? "dp-highlight" : ""];
-						},
-						onSelect: function(dateText, inst) {
-							var date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input1_"+Num).val());
-							var date2 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input2_"+Num).val());
-							if (!date1 || date2) {
-								$("#input1_"+Num).val(dateText);
-								$("#input2_"+Num).val("");
-								$(this).datepicker("option", "minDate", dateText);
-							} else {
-								$("#input2_"+Num).val(dateText);
-								$(this).datepicker("option", "minDate", 0);
-							}
-						}
-					});
-				});
-				$('body').trigger('create');
-			},
-			error: function(challenges, error) {
-				console.log(error);
-			}
-		});
 	}
 };
 app.initialize();
-app.liTemplate = Handlebars.compile($("#challenge-list-tpl").html());
+
 function onClickList (id) {
 	app.route('challenge',id);
 }
 function onChooseChallenger (ChallengeID) {
 	app.route('chooseChallenger',ChallengeID);
+}
+function goHome () {
+	app.route('HomeView');
 }
 
 

@@ -15,11 +15,11 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 
 <body class="ui-mobile-viewport ui-overlay-b platform-ios platform-cordova platform-webview">
 <script id="home-tpl" type="text/x-handlebars-template">
-<div data-role="page" id="testpage" class="ui-page-theme-b">
+<div data-role="page" id="HomeView" class="ui-page-theme-b">
 	<div data-role="header">
 		<h1>Select a Challenge</h1>
-		<a href="#panel-overlay" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Back</a>
-		<a href="#panel-overlay" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>
+		<a href="#panel-overlay" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Menu</a>
+		<!--<a href="goHome();" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Back</a>-->
 	</div>
 	<!-- /header -->
 	<div role="main" class="ui-content">
@@ -70,11 +70,11 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
     {{/.}}
 </script>
 <script id="challenge-who-tpl" type="text/x-handlebars-template">
-<div data-role="page" id="testpage" class="ui-page-theme-b">
+<div data-role="page" id="testpage2" class="ui-page-theme-b">
 	<div data-role="header" data-position="fixed">
 		<h1>Find a Challenger</h1>
-		<a href="#panel-overlay" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Back</a>
-		<a href="#panel-overlay" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>
+		<a href="#panel-overlay" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Menu</a>
+		<a onclick="goHome();" href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left">Back</a>
 	</div>
 	<div class='search-bar'><input class='search-key' type="search" autocorrect="off" autocapitalize="off"/></div>
 	<!-- /header -->

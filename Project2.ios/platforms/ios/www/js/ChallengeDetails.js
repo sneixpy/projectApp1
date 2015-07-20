@@ -61,12 +61,7 @@ var ChallengeDetails = function(ChallengeID) {
 				// information about the error.
 			}
 		});
-		
-		
-		
-		
-		
-		
+	
 		/*
 		var url= "http://stmiconsulting.com/cgi-bin/APP/dataConnection.php?Type=getChallenges";
 		$.getJSON(url,function(data){

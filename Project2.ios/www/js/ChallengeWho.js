@@ -6,12 +6,11 @@ var ChallengeWho = function(ChallengeID) {
  
 	this.render = function() {
 		this.el.html(ChallengeWho.template());
-		//$('body').html(ChallengeWho.template());
-		app.slidePage(this);
-		$('body').trigger('create');
-		$('.ui-page-theme-b').css("display","block");
+		return this;
 	};
-	
+	this.reRender = function() {
+		return this;
+	};
 	this.searchContacts = function(event) {
 		if (event) event.preventDefault();
 		//console.log('searchContacts');
@@ -28,11 +27,10 @@ var ChallengeWho = function(ChallengeID) {
 	};
 
     this.initialize = function() {
-        this.el = $('<div/>');
+        this.el = $('<div id="ChallengeWhoDiv"/>');
 		var self = this;
-		this.el.on('keyup', '.search-key', this.searchContacts);
-		self.render();
 		this.searchContacts();
+		this.el.on('keyup', '.search-key', this.searchContacts);
     };
  
     this.initialize();
