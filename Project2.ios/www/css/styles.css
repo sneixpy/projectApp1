@@ -41,6 +41,21 @@
     height: 100%;
     -webkit-transform:translate3d(0,0,0);
 }
+.scroll {
+	overflow: auto;
+}
+.search-bar {
+    margin-left: 1%;
+    position: fixed;
+    top: 34px;
+    width: 98%;
+}
+.contact-list {
+    margin-left: 1%;
+    position: fixed;
+    top: 64px;
+    width: 98%;
+}
 .stage-center {
     top: 0;
     left: 0;

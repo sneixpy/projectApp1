@@ -30,20 +30,20 @@
 	route: function(page,id) {  // Function to navigate all to all different pages
 		var self = this;
 		if (page == 'HomeView' || !page) {
-			if (this.homeView){
-				this.homePage=true;
-				this.slidePage(this.homeView.reRender());
-			}else{
+			this.homePage='HomeView';
+			//if (this.homeView){
+			//	this.slidePage(this.homeView.reRender());
+			//}else{
 				this.homeView = new HomeView();
 				this.slidePage(this.homeView.render());
-			}
-		}else if (page == "chooseChallenger"){
-			if (this.challengeWho){
-				this.slidePage(this.challengeWho.reRender());
-			}else{
+			//}
+		}else if (page == 'chooseChallenger'){
+			this.homePage='NO';
+			//if (this.challengeWho){
+			//	this.slidePage(this.challengeWho.reRender());
+			//}else{
 				this.challengeWho = new ChallengeWho(id);
-				this.slidePage(this.challengeWho.render());
-			}
+			//}
 		}
 		//else if (page == "challenge"){
 		//	var CD = new ChallengeDetails(id);
@@ -60,12 +60,14 @@
 			$('body').append(page.el);
 			this.currentPage = page;
 			return;
+		} else {
+			this.currentPage = page;
 		}
 		// Cleaning up: remove old pages that were moved out of the viewport
-		$('.stage-right, .stage-left, .stage-center').remove();
+		$('.stage-right, .stage-left').remove();
 		//$('.stage-right, .stage-left').not('.homePage').remove();
-		
-		if (app.homePage) {
+
+		if (page === app.homePage) {
 			// Always apply a Back transition (slide from left) when we go back to the search page
 			$(page.el).attr('class', 'page stage-left');
 			currentPageDest = "stage-right";
@@ -74,7 +76,7 @@
 			$(page.el).attr('class', 'page stage-right');
 			currentPageDest = "stage-left";
 		}
-		this.currentPage = page;
+		
 		$('body').append(page.el);
 		$('body').trigger('create');
 		$('.page').css("display","block");
@@ -88,7 +90,6 @@
 			$(page.el).attr('class', 'page stage-center transition');
 			self.currentPage = page;
 		});
-
 	},
 	initialize: function() {
 		var self = this;

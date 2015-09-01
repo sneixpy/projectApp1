@@ -2,18 +2,28 @@
     This page will let endusers select the challenge they want to make.
     This currently the workflow should be challenge select
 */
+function trimString(s) {
+  var l=0, r=s.length -1;
+  while(l < s.length && s[l] == ' ') l++;
+  while(r > l && s[r] == ' ') r-=1;
+  return s.substring(l, r+1);
+}
+
 var ChallengeWho = function(ChallengeID) {
  
 	this.render = function() {
 		this.el.html(ChallengeWho.template());
-		return this;
+		this.el.trigger('create');
+		app.slidePage(this);
+		//$('.ui-page-theme-b').css("display","block");
+		//this.searchContacts();
 	};
 	this.reRender = function() {
 		return this;
 	};
-	this.searchContacts = function(event) {
+	this.getContacts = function(event) {
 		if (event) event.preventDefault();
-		//console.log('searchContacts');
+		console.log('getContacts');
 		if (!navigator.contacts) {
 			app.showAlert("Contacts API not supported", "Error");
 			return;
@@ -25,12 +35,31 @@ var ChallengeWho = function(ChallengeID) {
 		navigator.contacts.find(filter, onSuccess, onError, options);
 		return false;
 	};
+	this.searchContacts = function(event) {
+		if (event) event.preventDefault();
+		console.log('searchContacts');
+		var results = [];
+		var toSearch = trimString($('.search-key').val());
+		if (toSearch.length > 2){
+			for(var i=0; i<ChallengeWho.ContactObj.length; i++) {
+				if(ChallengeWho.ContactObj[i]['Name'].toLowerCase().indexOf(toSearch.toLowerCase())!=-1) {
+					results.push(ChallengeWho.ContactObj[i]);
+				}
+			}
+		
+			$('.contact-list').html('');
+			$('.contact-list').html(ChallengeWho.ContactList(results));
+			$('.contact-list').trigger('create');
+		}
+		return false;
+	};
 
     this.initialize = function() {
         this.el = $('<div id="ChallengeWhoDiv"/>');
 		var self = this;
-		this.searchContacts();
+		this.getContacts();
 		this.el.on('keyup', '.search-key', this.searchContacts);
+		self.render();
     };
  
     this.initialize();
@@ -50,7 +79,6 @@ function onSuccess(contacts) {
     id: 3,
     type: 'other' } ]
  */
- 	var tempObj = new Array();
  	var t=0;
  	var i=0;
 	for (t=0,i=0; i<contacts.length; i++) {
@@ -59,12 +87,13 @@ function onSuccess(contacts) {
 			for (var j=0; j<contacts[i].emails.length; j++) {
 				tmp.push({'Id': contacts[i].emails[j].id,'Email': contacts[i].emails[j].value});
 			}
-			tempObj[t] = {'id':contacts[i].id, 'Name':contacts[i].name.formatted, 'Emails': tmp};
+			ChallengeWho.ContactObj[t] = {'id':contacts[i].id, 'Name':contacts[i].name.formatted, 'Emails': tmp};
+			//console.log(contacts[i].id+'='+contacts[i].name.formatted+"="+tmp);
 			t++;
 		}
 	}
-	$('.contact-list').html(ChallengeWho.ContactList(tempObj));
-	$('.contact-list').trigger('create');
+	//$('.contact-list').html(ChallengeWho.ContactList(ChallengeWho.ContactObj));
+	//$('.contact-list').trigger('create');
 }
 function onError(contactError) {
 	console.log('onError!');
@@ -72,6 +101,7 @@ function onError(contactError) {
 
 ChallengeWho.template = Handlebars.compile($("#challenge-who-tpl").html());
 ChallengeWho.ContactList = Handlebars.compile($("#contact-list-tpl").html());
+ChallengeWho.ContactObj=[];
 
 
 
