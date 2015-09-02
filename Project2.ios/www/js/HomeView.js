@@ -8,11 +8,7 @@
 		return this;
 	};
 	this.reRender = function() {
-		this.el.trigger('create');
-		$(this.el).find('chooseDates').each(function( i, cD ) {
-			var Num = cD.id.split("_")[1];
-			$('#'+cD.id).datepicker('destroy');
-		});
+		this.el.html($('#HomeViewDiv').html());
 		return this;
 	};
 	this.buildChallengeList = function() {
