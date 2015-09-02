@@ -43,6 +43,7 @@
 			//	this.slidePage(this.challengeWho.reRender());
 			//}else{
 				this.challengeWho = new ChallengeWho(id);
+				this.slidePage(this.challengeWho.render());
 			//}
 		}
 		//else if (page == "challenge"){
@@ -57,7 +58,7 @@
 		// If there is no current page (app just started) -> No transition: Position new page in the view port
 		if (!this.currentPage) {
 			$(page.el).attr('class', 'page stage-center');
-			$('body').append(page.el);
+			//$('body').append(page.el);
 			this.currentPage = page;
 			return;
 		} else {
@@ -77,8 +78,8 @@
 			currentPageDest = "stage-left";
 		}
 		
-		$('body').append(page.el);
-		$('body').trigger('create');
+		//$('body').append(page.el);
+		//$('body').trigger('create');
 		$('.page').css("display","block");
 		$('.ui-page').css("display","block");
 
@@ -87,6 +88,7 @@
 			// Slide out the current page: If new page slides from the right -> slide current page to the left, and vice versa
 			$(self.currentPage.el).attr('class', 'page transition ' + currentPageDest);
 			// Slide in the new page
+			$('.stage-center').remove();
 			$(page.el).attr('class', 'page stage-center transition');
 			self.currentPage = page;
 		});
