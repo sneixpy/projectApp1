@@ -48,9 +48,14 @@
 		CD0BBBA4DEE044118A09A50F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3113B772457F41DC86ACD64D /* CoreLocation.framework */; };
 		3978FFBADF0344CDB2ACFEA3 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FB045801957D458FA7819B54 /* libz.1.1.3.dylib */; };
 		D527D743FFF54734B5C53381 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C512CE382DA4277B5B9E821 /* QuartzCore.framework */; };
-		28F82D019A8F4407887FC3A1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD27901DBF5242CF9F457ED1 /* Security.framework */; };
 		DF87524EB80547C9B048C579 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6233588063F64D57AD7548F2 /* StoreKit.framework */; };
 		E914467963744042A823B194 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E22AEB11BCB240F0BBEF269F /* SystemConfiguration.framework */; };
+		AE5CF683955B47E28A26B1C7 /* FacebookConnectPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = A9CCA24B5B1D43268705BD9F /* FacebookConnectPlugin.m */; };
+		B92CD22E94A44220B001D8C3 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D5F57EA02C4C40A8F55B84 /* FacebookSDK.framework */; };
+		C60A3BEFAC9A4BB4AC67D31A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA68C164BDBF4B158494DD89 /* libsqlite3.dylib */; };
+		4E9620D8475A4D3D83D34607 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78DB2048FAF14C19A82B07C5 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		3085A8AEFAD348B88B3D708A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 733DE7EA9B6642379B761306 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		4E45617572FF4E25BD726F0E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78B5D84FC1E54B0B8F81626E /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,9 +132,15 @@
 		3113B772457F41DC86ACD64D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		FB045801957D458FA7819B54 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libz.1.1.3.dylib"; path = "usr/lib/libz.1.1.3.dylib"; sourceTree = SDKROOT; fileEncoding = 4; };
 		6C512CE382DA4277B5B9E821 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "QuartzCore.framework"; path = "System/Library/Frameworks/QuartzCore.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
-		BD27901DBF5242CF9F457ED1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Security.framework"; path = "System/Library/Frameworks/Security.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		6233588063F64D57AD7548F2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "StoreKit.framework"; path = "System/Library/Frameworks/StoreKit.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		E22AEB11BCB240F0BBEF269F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		A9CCA24B5B1D43268705BD9F /* FacebookConnectPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "FacebookConnectPlugin.m"; path = "com.phonegap.plugins.facebookconnect/FacebookConnectPlugin.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		764016BFF5D54B8EB0068D20 /* FacebookConnectPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FacebookConnectPlugin.h"; path = "com.phonegap.plugins.facebookconnect/FacebookConnectPlugin.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		91D5F57EA02C4C40A8F55B84 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "FacebookSDK.framework"; path = "Project1\Plugins\com.phonegap.plugins.facebookconnect\FacebookSDK.framework"; sourceTree = "<group>"; };
+		AA68C164BDBF4B158494DD89 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsqlite3.dylib"; path = "usr/lib/libsqlite3.dylib"; sourceTree = SDKROOT; fileEncoding = 4; };
+		78DB2048FAF14C19A82B07C5 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Social.framework"; path = "System/Library/Frameworks/Social.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		733DE7EA9B6642379B761306 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Accounts.framework"; path = "System/Library/Frameworks/Accounts.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		78B5D84FC1E54B0B8F81626E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Security.framework"; path = "System/Library/Frameworks/Security.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,9 +158,13 @@
 				CD0BBBA4DEE044118A09A50F /* CoreLocation.framework in Frameworks */,
 				3978FFBADF0344CDB2ACFEA3 /* libz.1.1.3.dylib in Frameworks */,
 				D527D743FFF54734B5C53381 /* QuartzCore.framework in Frameworks */,
-				28F82D019A8F4407887FC3A1 /* Security.framework in Frameworks */,
 				DF87524EB80547C9B048C579 /* StoreKit.framework in Frameworks */,
 				E914467963744042A823B194 /* SystemConfiguration.framework in Frameworks */,
+				B92CD22E94A44220B001D8C3 /* FacebookSDK.framework in Frameworks */,
+				C60A3BEFAC9A4BB4AC67D31A /* libsqlite3.dylib in Frameworks */,
+				4E9620D8475A4D3D83D34607 /* Social.framework in Frameworks */,
+				3085A8AEFAD348B88B3D708A /* Accounts.framework in Frameworks */,
+				4E45617572FF4E25BD726F0E /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,9 +244,13 @@
 				3113B772457F41DC86ACD64D /* CoreLocation.framework */,
 				FB045801957D458FA7819B54 /* libz.1.1.3.dylib */,
 				6C512CE382DA4277B5B9E821 /* QuartzCore.framework */,
-				BD27901DBF5242CF9F457ED1 /* Security.framework */,
 				6233588063F64D57AD7548F2 /* StoreKit.framework */,
 				E22AEB11BCB240F0BBEF269F /* SystemConfiguration.framework */,
+				91D5F57EA02C4C40A8F55B84 /* FacebookSDK.framework */,
+				AA68C164BDBF4B158494DD89 /* libsqlite3.dylib */,
+				78DB2048FAF14C19A82B07C5 /* Social.framework */,
+				733DE7EA9B6642379B761306 /* Accounts.framework */,
+				78B5D84FC1E54B0B8F81626E /* Security.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -251,6 +270,8 @@
 				39542DB05BB747468A4B6FD1 /* DatePicker.h */,
 				35AC0363E32248AC9D155DB8 /* CDVParsePlugin.m */,
 				5E08417AAE9F497983AD7A0C /* CDVParsePlugin.h */,
+				A9CCA24B5B1D43268705BD9F /* FacebookConnectPlugin.m */,
+				764016BFF5D54B8EB0068D20 /* FacebookConnectPlugin.h */,
 			);
 			name = Plugins;
 			path = "Project1/Plugins";
@@ -438,6 +459,7 @@
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				B9219271D72D46858C7304BC /* DatePicker.m in Sources */,
 				C7D020A74B8C4E4AB1945A9F /* CDVParsePlugin.m in Sources */,
+				AE5CF683955B47E28A26B1C7 /* FacebookConnectPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +505,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"Project1/Plugins/org.apache.cordova.core.parseplugin\"",
+					"\"Project1\Plugins\com.phonegap.plugins.facebookconnect\"",
+					"\"Project1\Plugins\com.phonegap.plugins.facebookconnect\"",
+					"\"Project1\Plugins\com.phonegap.plugins.facebookconnect\"",
 				);
 			};
 			name = Debug;
@@ -516,6 +541,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"Project1/Plugins/org.apache.cordova.core.parseplugin\"",
+					"\"Project1\Plugins\com.phonegap.plugins.facebookconnect\"",
+					"\"Project1\Plugins\com.phonegap.plugins.facebookconnect\"",
+					"\"Project1\Plugins\com.phonegap.plugins.facebookconnect\"",
 				);
 			};
 			name = Release;

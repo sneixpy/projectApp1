@@ -13,6 +13,13 @@ module.exports = [
         "clobbers": [
             "window.parsePlugin"
         ]
+    },
+    {
+        "file": "plugins/com.phonegap.plugins.facebookconnect/facebookConnectPlugin.js",
+        "id": "com.phonegap.plugins.facebookconnect.FacebookConnectPlugin",
+        "clobbers": [
+            "facebookConnectPlugin"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -20,7 +27,8 @@ module.exports.metadata =
 {
     "cordova-plugin-whitelist": "1.0.0",
     "com.sharinglabs.cordova.plugin.datepicker": "1.1.3",
-    "org.apache.cordova.core.parseplugin": "0.1.0"
+    "org.apache.cordova.core.parseplugin": "0.1.0",
+    "com.phonegap.plugins.facebookconnect": "0.11.0"
 }
 // BOTTOM OF METADATA
 });

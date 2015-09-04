@@ -31,12 +31,12 @@
 		var self = this;
 		if (page == 'HomeView' || !page) {
 			this.homePage='HomeView';
-			if (this.homeView){
-				this.slidePage(this.homeView.reRender());
-			}else{
+			//if (this.homeView){
+			//	this.slidePage(this.homeView.reRender());
+			//}else{
 				this.homeView = new HomeView();
 				this.slidePage(this.homeView.render());
-			}
+			//}
 		}else if (page == 'chooseChallenger'){
 			this.homePage='NO';
 			//if (this.challengeWho){
@@ -65,7 +65,7 @@
 			this.currentPage = page;
 		}
 		// Cleaning up: remove old pages that were moved out of the viewport
-		$('.stage-right, .stage-left').not('#HomeViewDiv').remove();
+		$('.stage-right, .stage-left').remove();
 		//$('.stage-right, .stage-left').not('.homePage').remove();
 
 		if (page === app.homePage) {
@@ -88,7 +88,7 @@
 			// Slide out the current page: If new page slides from the right -> slide current page to the left, and vice versa
 			$(self.currentPage.el).attr('class', 'transition ' + currentPageDest);
 			// Slide in the new page
-			$('.stage-center').not('#HomeViewDiv').remove();
+			$('.stage-center').remove();
 			$(page.el).attr('class', 'page stage-center transition');
 			self.currentPage = page;
 		});
