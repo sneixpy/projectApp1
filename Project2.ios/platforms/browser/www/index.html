@@ -40,8 +40,13 @@
 <script src="js/openfb.js"></script>
 
 <script>
+	var GUUID = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+			return v.toString(16);
+	});
+	alert(GUUID);
      // Defaults to sessionStorage for storing the Facebook token
-     openFB.init({appId: '1630652160519912'});
+     openFB.init({appId: '1630652160519912', oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&', cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&'});
     //  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
     //  openFB.init({appId: 'YOUR_FB_APP_ID', tokenStore: window.localStorage});
     function login() {
@@ -52,7 +57,7 @@
                     } else {
                         alert('Facebook login failed: ' + response.error);
                     }
-                }, {scope: 'email,read_stream,publish_actions'});
+                }, {scope: 'email'});
     }
     function getInfo() {
         openFB.api({
