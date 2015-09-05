@@ -67,19 +67,20 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 			}, {scope: 'email,publish_actions'});
     }
     function getInfo() {
-		openFB.validateLogin(
-			"openFB.api({"+
-				"path: '/me',"+
-				"success: function(data) {"+
-					"console.log(JSON.stringify(data));"+
-					"document.getElementById('userName').innerHTML = data.name;"+
-					"document.getElementById('userPic').src = 'http://graph.facebook.com/' + data.id + '/picture?type=small';"+
-				"},"+
-				"error: errorHandler})"
-		);          
+		
+		var options = {
+				path: '/me',
+				success: function(data) {
+					console.log(JSON.stringify(data));
+					document.getElementById('userName').innerHTML = data.name;
+					document.getElementById('userPic').src = 'http://graph.facebook.com/' + data.id + '/picture?type=small';
+				},
+				error: errorHandler};
+	
+		openFB.validateLogin("api", options);       
     }
     function share() {
-        openFB.api({
+       var options = {
             method: 'POST',
             path: '/me/feed',
             params: {
@@ -88,31 +89,33 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
             success: function() {
                 alert('the item was posted on Facebook');
             },
-            error: errorHandler});
+            error: errorHandler};
+    	openFB.validateLogin("api", options);      
     }
     function readPermissions() {
-        openFB.api({
+        var options = {
             method: 'GET',
             path: '/me/permissions',
             success: function(result) {
                 alert(JSON.stringify(result.data));
             },
             error: errorHandler
-        });
+        };
+        openFB.validateLogin("api", options); 
     }
     function revoke() {
-        openFB.revokePermissions(
-                function() {
+        var var1 = function() {
                     alert('Permissions revoked');
-                },
-                errorHandler);
+                };
+        var var2 = errorHandler;
+        openFB.validateLogin("revokePermissions", var1, var2); 
     }
     function logout() {
-        openFB.logout(
-                function() {
+        var var1 = function() {
                     alert('Logout successful');
-                },
-                errorHandler);
+                };
+        var var2 = errorHandler;
+    	openFB.validateLogin("logout", var1, var2);
     }
     function errorHandler(error) {
         alert(error.message);

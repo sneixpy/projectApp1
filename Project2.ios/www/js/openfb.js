@@ -168,7 +168,16 @@ var openFB = (function () {
         // oauthCallback() function. See oauthcallback.html for details.
 
     }
-    function validateLogin(runFunction) {
+    function runFunction(fnstring, var1, var2) {
+    	switch (fnstring) {
+			case "logout": logout(var1); break;
+			case "revokePermissions": revokePermissions(var1, var2); break;
+			case "getLoginStatus": getLoginStatus(var1); break;
+			case "api": api(var1); break;
+		}
+    }
+    function validateLogin(fnstring, var1, var2) {
+
     	if ( !loginRetrieved ) {
 			var Session = Parse.Object.extend("Session");
 			var query = new Parse.Query(Session);
@@ -179,9 +188,9 @@ var openFB = (function () {
 						var object = results[0];
 						tokenStore.fbAccessToken = object.get('access_token');
 						loginRetrieved = true;
-						if (runFunction) eval(runFunction);
+						runFunction(fnstring, var1, var2);
 					} else {
-						if (runFunction) eval(runFunction);
+						runFunction(fnstring, var1, var2);
 					}
 				},
 				error: function(error) {
@@ -189,7 +198,7 @@ var openFB = (function () {
 				}
 			});
 		} else {
-			if (runFunction) eval(runFunction);
+			runFunction(fnstring, var1, var2);
 		}
     }
     /**
