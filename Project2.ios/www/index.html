@@ -58,38 +58,25 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
     //  openFB.init({appId: 'YOUR_FB_APP_ID', tokenStore: window.localStorage});
     function login() {
         openFB.login(
-                function(response) {
-                    if(response.status === 'connected') {
-                        alert('Facebook login succeeded, got access token: ' + response.authResponse.accessToken);
-                    } else {
-                        alert('Facebook login failed: ' + response.error);
-                    }
-                }, {scope: 'email'});
+			function(response) {
+				if(response.status === 'connected') {
+					alert('Facebook login succeeded, got access token: ' + response.authResponse.accessToken);
+				} else {
+					alert('Facebook login failed: ' + response.error);
+				}
+			}, {scope: 'email,publish_actions'});
     }
     function getInfo() {
-		var Challenge = Parse.Object.extend("Challenge");
-			var Challenges = Parse.Collection.extend({
-				model: Challenge
-			});
-			var challenges = new Challenges();
-			challenges.fetch({
-				success: function() {
-					HomeView.challengeList = challenges.toJSON();
-					self.buildChallengeList();
-				},
-				error: function(challenges, error) {
-					console.log(error);
-				}
-			});
-		
-        openFB.api({
-            path: '/me',
-            success: function(data) {
-                console.log(JSON.stringify(data));
-                document.getElementById("userName").innerHTML = data.name;
-                document.getElementById("userPic").src = 'http://graph.facebook.com/' + data.id + '/picture?type=small';
-            },
-            error: errorHandler});
+		openFB.validateLogin(
+			"openFB.api({"+
+				"path: '/me',"+
+				"success: function(data) {"+
+					"console.log(JSON.stringify(data));"+
+					"document.getElementById('userName').innerHTML = data.name;"+
+					"document.getElementById('userPic').src = 'http://graph.facebook.com/' + data.id + '/picture?type=small';"+
+				"},"+
+				"error: errorHandler})"
+		);          
     }
     function share() {
         openFB.api({

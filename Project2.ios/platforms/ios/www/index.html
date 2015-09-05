@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="platform-ios platform-cordova platform-webview">
+<script src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3tQ4ACY2XrJIdmJA91grNHrs");
+</script>
+
+
 
 <div class="content content-padded">
 
@@ -44,22 +51,32 @@
 			var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
 			return v.toString(16);
 	});
-	alert(GUUID);
+	//alert(GUUID);
      // Defaults to sessionStorage for storing the Facebook token
      openFB.init({appId: '1630652160519912', oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&', cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&'});
     //  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
     //  openFB.init({appId: 'YOUR_FB_APP_ID', tokenStore: window.localStorage});
     function login() {
         openFB.login(
-                function(response) {
-                    if(response.status === 'connected') {
-                        alert('Facebook login succeeded, got access token: ' + response.authResponse.accessToken);
-                    } else {
-                        alert('Facebook login failed: ' + response.error);
-                    }
-                }, {scope: 'email'});
+			function(response) {
+				if(response.status === 'connected') {
+					alert('Facebook login succeeded, got access token: ' + response.authResponse.accessToken);
+				} else {
+					alert('Facebook login failed: ' + response.error);
+				}
+			}, {scope: 'email'});
     }
     function getInfo() {
+		var session = Parse.Object.extend("Session");
+		session.fetch({
+			success: function() {
+				alert(session['GUUID']);
+			},
+			error: function(session, error) {
+				console.log(error);
+			}
+		});
+		/*
         openFB.api({
             path: '/me',
             success: function(data) {
@@ -68,6 +85,7 @@
                 document.getElementById("userPic").src = 'http://graph.facebook.com/' + data.id + '/picture?type=small';
             },
             error: errorHandler});
+            */
     }
     function share() {
         openFB.api({

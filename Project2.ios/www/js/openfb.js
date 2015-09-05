@@ -12,6 +12,8 @@ var openFB = (function () {
     var loginURL = 'https://www.facebook.com/dialog/oauth',
 
         logoutURL = 'https://www.facebook.com/logout.php',
+        
+        loginRetrieved = false,
 
     // By default we store fbtoken in sessionStorage. This can be overridden in init()
         tokenStore = window.sessionStorage,
@@ -166,7 +168,30 @@ var openFB = (function () {
         // oauthCallback() function. See oauthcallback.html for details.
 
     }
-
+    function validateLogin(runFunction) {
+    	if ( !loginRetrieved ) {
+			var Session = Parse.Object.extend("Session");
+			var query = new Parse.Query(Session);
+			query.equalTo("GUUID", GUUID);
+			query.find({
+				success: function(results) {
+					if ( results.length > 0 ) {
+						var object = results[0];
+						tokenStore.fbAccessToken = object.get('access_token');
+						loginRetrieved = true;
+						if (runFunction) eval(runFunction);
+					} else {
+						if (runFunction) eval(runFunction);
+					}
+				},
+				error: function(error) {
+					alert("Error: " + error.code + " " + error.message);
+				}
+			});
+		} else {
+			if (runFunction) eval(runFunction);
+		}
+    }
     /**
      * Called either by oauthcallback.html (when the app is running the browser) or by the loginWindow loadstart event
      * handler defined in the login() function (when the app is running in the Cordova/PhoneGap container).
@@ -299,6 +324,7 @@ var openFB = (function () {
         revokePermissions: revokePermissions,
         api: api,
         oauthCallback: oauthCallback,
+        validateLogin: validateLogin,
         getLoginStatus: getLoginStatus
     }
 
