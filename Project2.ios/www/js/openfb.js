@@ -174,6 +174,7 @@ var openFB = (function () {
 			case "revokePermissions": revokePermissions(var1, var2); break;
 			case "getLoginStatus": getLoginStatus(var1); break;
 			case "api": api(var1); break;
+			case "login": login(var1,var2); break;
 		}
     }
     function validateLogin(fnstring, var1, var2) {

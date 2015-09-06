@@ -1,125 +1,171 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>OpenFB Sample</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-    <link rel="stylesheet" href="ratchet.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+﻿<html class="ui-mobile">
+<script src="css/source-sans-pro.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-darkness/jquery-ui.css" />
+<link rel="stylesheet" href="css/styles.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 <script src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+<script src="js/openfb.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3tQ4ACY2XrJIdmJA91grNHrs");
+var GUUID = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+	return v.toString(16);
+});
+
+// Defaults to sessionStorage for storing the Facebook token
+/********
+openFB.init({appId: '1630652160519912', 
+	oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&', 
+	cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&'});
+********/
+//  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
+
+openFB.init({appId: '1630652160519912', 
+	oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&', 
+	cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&',
+	tokenStore: window.localStorage});
+
+
 </script>
 
+<body class="ui-mobile-viewport ui-overlay-b">
+<div id="fb-root"></div>
 
+<script id="member-login-tpl" type="text/x-handlebars-template">
+<div data-role="page" id="memberLogin" class="ui-page-theme-b">
+	<div data-role="header">
+		<h1>Login</h1>
+		<a href="#panel-overlay" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Menu</a>
+		<!--<a href="goHome();" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Back</a>-->
+	</div>
+	<!-- /header -->
+	<div role="main" class="ui-content">
 
-<div class="content content-padded">
-
-<button class="btn btn-block" onclick="login()">Login with Facebook</button>
-<hr/>
-
-<button class="btn btn-block" onclick="getInfo()">Get My Info</button>
-<p>Name: <span id="userName"></span></p>
-<img id="userPic"/>
-<hr/>
-
-<textarea id="Message" placeholder="What's on your mind?" rows="5"></textarea>
-<button class="btn btn-block" onclick="share()">Share</button>
-<hr/>
-
-<p>Complete Facebook Logout. After logging out, you'll have to login again and provide your Facebook credentials.</p>
-<button class="btn btn-block" onclick="logout()">Logout</button>
-<hr/>
-
-<button class="btn btn-block" onclick="readPermissions()">Read Permissions</button>
-
-<p>Revoke App Permissions. After revoking permissions, you'll have to grant permissions again when logging in.</p>
-<button class="btn btn-block" onclick="revoke()">Revoke Permissions</button>
-
-</div>
-
-<!--cordova.js is automatically injected by the Cordova build process-->
-<script src="cordova.js"></script>
-
-<script src="js/openfb.js"></script>
-
-<script>
-	var GUUID = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-			var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-			return v.toString(16);
-	});
-	//alert(GUUID);
-     // Defaults to sessionStorage for storing the Facebook token
-     openFB.init({appId: '1630652160519912', oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&', cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&'});
-    //  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
-    //  openFB.init({appId: 'YOUR_FB_APP_ID', tokenStore: window.localStorage});
-    function login() {
-        openFB.login(
-			function(response) {
-				if(response.status === 'connected') {
-					alert('Facebook login succeeded, got access token: ' + response.authResponse.accessToken);
-				} else {
-					alert('Facebook login failed: ' + response.error);
-				}
-			}, {scope: 'email,publish_actions'});
-    }
-    function getInfo() {
-		
-		var options = {
-				path: '/me',
-				success: function(data) {
-					console.log(JSON.stringify(data));
-					document.getElementById('userName').innerHTML = data.name;
-					document.getElementById('userPic').src = 'http://graph.facebook.com/' + data.id + '/picture?type=small';
-				},
-				error: errorHandler};
+		<div style="margin-bottom:1em;" class="ui-body ui-body-b ui-corner-all" id="ui-body-test">
+			<button class="btn btn-block" onclick="login()">Login with Facebook</button>
+		</div>
 	
-		openFB.validateLogin("api", options);       
-    }
-    function share() {
-       var options = {
-            method: 'POST',
-            path: '/me/feed',
-            params: {
-                message: document.getElementById('Message').value || 'Testing Facebook APIs'
-            },
-            success: function() {
-                alert('the item was posted on Facebook');
-            },
-            error: errorHandler};
-    	openFB.validateLogin("api", options);      
-    }
-    function readPermissions() {
-        var options = {
-            method: 'GET',
-            path: '/me/permissions',
-            success: function(result) {
-                alert(JSON.stringify(result.data));
-            },
-            error: errorHandler
-        };
-        openFB.validateLogin("api", options); 
-    }
-    function revoke() {
-        var var1 = function() {
-                    alert('Permissions revoked');
-                };
-        var var2 = errorHandler;
-        openFB.validateLogin("revokePermissions", var1, var2); 
-    }
-    function logout() {
-        var var1 = function() {
-                    alert('Logout successful');
-                };
-        var var2 = errorHandler;
-    	openFB.validateLogin("logout", var1, var2);
-    }
-    function errorHandler(error) {
-        alert(error.message);
-    }
+	<!-- /content -->
+		<div data-role="panel" id="panel-overlay" data-display="overlay">
+			<ul data-role="listview">
+				<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+				<li><a href="#">List item</a></li>
+				<li><a href="#">List item</a></li>
+				<li><a href="#">List item</a></li>
+			</ul>
+			<br><br>
+			<button class="ui-btn ui-corner-all ui-shadow">Button</button>
+		</div>
+	</div>
+</div>
 </script>
+
+<script id="challenge-home-tpl" type="text/x-handlebars-template">
+<div data-role="page" id="ChallengeList" class="ui-page-theme-b">
+	<div data-role="header">
+		<h1>Select a Challenge</h1>
+		<a href="#panel-overlay" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Menu</a>
+		<!--<a href="goHome();" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Back</a>-->
+	</div>
+	<!-- /header -->
+	<div role="main" class="ui-content">
+
+		<div style="margin-bottom:1em;" class="ui-body ui-body-b ui-corner-all" id="ui-body-test">
+
+		</div>
+		<div class="scroll">
+			<div data-content-theme="b" data-role="collapsibleset" class="challenge-list">
+			</div>
+		</div>
+	
+	<!-- /content -->
+		<div data-role="panel" id="panel-overlay" data-display="overlay">
+			<ul data-role="listview">
+				<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+				<li><a href="#">List item</a></li>
+				<li><a href="#">List item</a></li>
+				<li><a href="#">List item</a></li>
+			</ul>
+			<br><br>
+			<button class="ui-btn ui-corner-all ui-shadow">Button</button>
+		</div>
+	</div>
+</div>
+</script>
+
+<script id="challenge-list-tpl" type="text/x-handlebars-template">
+    {{#.}}
+	<div data-role="collapsible">
+		<h3>{{this.Name}}</h3>
+		<form id="thing_{{this.num}}">
+			<div>
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<label for="a_{{this.num}}">Miles</label>
+					<input type="radio" name="theme" id="a_{{this.num}}" checked>
+					<label for="b_{{this.num}}">Time</label>
+					<input type="radio" name="theme" id="b_{{this.num}}">
+				</fieldset>
+			</div>
+			
+			<div id="datepicker_{{this.num}}" class="chooseDates"></div>
+			<input type="hidden" id="input1_{{this.num}}" readonly="true" class="input1" size="10">
+			<input type="hidden" id="input2_{{this.num}}" readonly="true" class="input2" size="10">
+			<div class="ui-controlgroup-horizontal"><button class="ui-btn ui-corner-all ui-shadow" onclick="onChooseChallenger({{this.num}});">Select Challengers</button></div>
+		</form>
+	</div>
+    {{/.}}
+</script>
+<script id="challenge-who-tpl" type="text/x-handlebars-template">
+<div data-role="page" id="testpage2" class="ui-page-theme-b">
+	<div data-role="header" data-position="fixed">
+		<h1>Find a Challenger</h1>
+		<a href="#panel-overlay" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Menu</a>
+		<a onclick="goHome();" href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left">Back</a>
+	</div>
+	<div class='search-bar'><input class='search-key' type="search" autocorrect="off" autocapitalize="off"/></div>
+	<!-- /header -->
+	<div data-content-theme="b" data-role="collapsibleset" class="contact-list">
+	</div>
+	
+	<!-- /content -->
+	<div data-role="panel" id="panel-overlay" data-display="overlay">
+		<ul data-role="listview">
+			<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+			<li><a href="#">List item</a></li>
+			<li><a href="#">List item</a></li>
+			<li><a href="#">List item</a></li>
+		</ul>
+		<br><br>
+		<button class="ui-btn ui-corner-all ui-shadow">Button</button>
+	</div>
+</div>
+</script>
+<script id="contact-list-tpl" type="text/x-handlebars-template">
+    {{#.}}
+	<div data-role="collapsible">
+		<h3>{{this.Name}}</h3>
+		<Form>
+			<fieldset data-role="controlgroup">
+			{{#each Emails}}
+			<input name="checkbox-{{../this.id}}-{{this.Id}}" id="checkbox-{{../this.id}}-{{this.Id}}" data-theme="b" type="checkbox">
+        	<label for="checkbox-{{../this.id}}-{{this.Id}}">{{this.Email}}</label>
+			{{/each}}
+			</fieldset>
+		</Form>
+	</div>
+    {{/.}}
+</script>
+<script src="lib/handlebars.js"></script>
+<script src="js/ChallengeList.js"></script>
+<script src="js/ChallengeDetails.js"></script>
+<script src="js/ChallengeWho.js"></script>
+<script src="js/MemberLogin.js"></script>
+<script src="js/storage/memory-store.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

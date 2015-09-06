@@ -29,13 +29,21 @@
 	},
 	route: function(page,id) {  // Function to navigate all to all different pages
 		var self = this;
-		if (page == 'HomeView' || !page) {
-			this.homePage='HomeView';
+		if (page == 'MemberLogin' || !page) {
+			this.homePage='MemberLogin';
 			//if (this.homeView){
 			//	this.slidePage(this.homeView.reRender());
 			//}else{
-				this.homeView = new HomeView();
-				this.slidePage(this.homeView.render());
+				this.memberLogin = new MemberLogin();
+				this.slidePage(this.memberLogin.render());
+			//}
+		}else if (page == 'ChallengeList'){
+			this.homePage='NO';
+			//if (this.homeView){
+			//	this.slidePage(this.homeView.reRender());
+			//}else{
+				this.challengeList = new ChallengeList();
+				this.slidePage(this.challengeList.render());
 			//}
 		}else if (page == 'chooseChallenger'){
 			this.homePage='NO';
@@ -108,8 +116,18 @@ function onChooseChallenger (ChallengeID) {
 	app.route('chooseChallenger',ChallengeID);
 }
 function goHome () {
-	app.route('HomeView');
+	app.route('ChallengeList');
 }
-
+function login() {
+	var var1 = function(response) {
+		if(response.status === 'connected') {
+			alert('Facebook login succeeded, got access token: ' + response.authResponse.accessToken);
+		} else {
+			alert('Facebook login failed: ' + response.error);
+		}
+	};
+	var var2 = {scope: 'email,publish_actions'};
+	openFB.validateLogin("login", var1, var2); 
+}
 
 
