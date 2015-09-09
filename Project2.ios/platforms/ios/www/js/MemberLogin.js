@@ -3,7 +3,7 @@
  	this.render = function() {
 		this.el.html(MemberLogin.template());
 		$('#contentDIV').html(this.el);
-		$('#contentDIV').trigger('create');
+		$('body').trigger('create');
 		return this;
 	};
 	this.LoginMember = function() {
@@ -16,4 +16,5 @@
     this.initialize();
  
 }
+MemberLogin.challengeList = [];
 MemberLogin.template = Handlebars.compile($("#member-login-tpl").html());

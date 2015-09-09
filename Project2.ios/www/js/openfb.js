@@ -178,7 +178,6 @@ var openFB = (function () {
 		}
     }
     function validateLogin(fnstring, var1, var2) {
-
     	if ( !loginRetrieved ) {
 			var Session = Parse.Object.extend("Session");
 			var query = new Parse.Query(Session);
@@ -238,7 +237,7 @@ var openFB = (function () {
             token = tokenStore.fbAccessToken;
 
         /* Remove token. Will fail silently if does not exist */
-        tokenStore.removeItem('fbtoken');
+        tokenStore.removeItem('fbAccessToken');
 
         if (token) {
             logoutWindow = window.open(logoutURL + '?access_token=' + token + '&next=' + logoutRedirectURL, '_blank', 'location=no,clearcache=yes');
@@ -286,7 +285,7 @@ var openFB = (function () {
             }
         };
 
-        xhr.open(method, url, true);
+        xhr.open(method, url, false);
         xhr.send();
     }
 

@@ -13,11 +13,8 @@ var ChallengeWho = function(ChallengeID) {
  
 	this.render = function() {
 		this.el.html(ChallengeWho.template());
-		$('body').append(this.el);
-		$('body').trigger('create');
-		//app.slidePage(this);
-		//$('.ui-page-theme-b').css("display","block");
-		//this.searchContacts();
+		$('#contentDIV').append(this.el);
+		$('#contentDIV').trigger('create');
 		return this;
 	};
 	this.reRender = function() {
@@ -27,15 +24,16 @@ var ChallengeWho = function(ChallengeID) {
 		if (event) event.preventDefault();
 		console.log('getContacts');
 		if (!navigator.contacts) {
-			app.showAlert("Contacts API not supported", "Error");
+			//app.showAlert("Contacts API not supported", "Error");
 			return;
+		} else {
+			var options = new ContactFindOptions();
+				options.filter=$('.search-key').val(); // empty search string returns all
+				options.multiple=true;    // return multiple results
+			var filter = ["name"]; // return contact.displayName field
+			navigator.contacts.find(filter, onSuccess, onError, options);
+			return false;
 		}
-		var options = new ContactFindOptions();
-			options.filter=$('.search-key').val(); // empty search string returns all
-			options.multiple=true;    // return multiple results
-		var filter = ["name"]; // return contact.displayName field
-		navigator.contacts.find(filter, onSuccess, onError, options);
-		return false;
 	};
 	this.searchContacts = function(event) {
 		if (event) event.preventDefault();
@@ -56,14 +54,13 @@ var ChallengeWho = function(ChallengeID) {
 	};
 
     this.initialize = function() {
-        this.el = $('<div id="ChallengeWhoDiv"/>');
 		var self = this;
+        this.el = $('<div id="ChallengeWhoDiv"/>');
 		this.getContacts(); // refresh contact list that is stored in variable.
 		this.el.on('keyup', '.search-key', this.searchContacts);
-		self.render();
+		//self.render();
     };
- 
-    this.initialize();
+	this.initialize();
  
  }
  

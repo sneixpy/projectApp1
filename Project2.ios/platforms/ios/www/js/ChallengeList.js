@@ -1,19 +1,22 @@
-﻿var HomeView = function() {
+﻿var ChallengeList = function() {
  
  	this.render = function() {
-		this.el.html(HomeView.template());
-		$('body').append(this.el);
+		this.el.html(ChallengeList.template());
+		$('#tempContentDIV').append(this.el);
 		$('body').trigger('create');
 		this.getChallengeList();
 		return this;
 	};
+	this.setAside = function() {
+		$("#ChallengeListDiv").hide();
+	};
 	this.reRender = function() {
-		this.el.html($('#HomeViewDiv').html());
+		$("#ChallengeListDiv").show();
 		return this;
 	};
 	this.buildChallengeList = function() {
-		$('.challenge-list').html(HomeView.liTemplate(HomeView.challengeList));
-		//$(this.el).find('challenge-list').html(HomeView.liTemplate(challenges.toJSON()));
+		$('.challenge-list').html(ChallengeList.liTemplate(ChallengeList.challengeList));
+		//$(this.el).find('challenge-list').html(ChallengeList.liTemplate(challenges.toJSON()));
 		$(' .chooseDates').each(function( i, cD ) {
 			var Num = cD.id.split("_")[1];
 			$('#'+cD.id).datepicker({
@@ -41,7 +44,7 @@
 	};
 	this.getChallengeList = function() {
 		var self = this;
-		if ( HomeView.challengeList.length < 1 ) {
+		if ( ChallengeList.challengeList.length < 1 ) {
 			var Challenge = Parse.Object.extend("Challenge");
 			var Challenges = Parse.Collection.extend({
 				model: Challenge
@@ -49,7 +52,7 @@
 			var challenges = new Challenges();
 			challenges.fetch({
 				success: function() {
-					HomeView.challengeList = challenges.toJSON();
+					ChallengeList.challengeList = challenges.toJSON();
 					self.buildChallengeList();
 				},
 				error: function(challenges, error) {
@@ -62,11 +65,11 @@
 	};
 	this.initialize = function() {
         // Define a div wrapper for the view. The div wrapper is used to attach events.
-        this.el = $('<div id="HomeViewDiv" />');
+        this.el = $('<div id="ChallengeListDiv" />');
     };
     this.initialize();
  
 }
-HomeView.challengeList = [];
-HomeView.template = Handlebars.compile($("#home-tpl").html());
-HomeView.liTemplate = Handlebars.compile($("#challenge-list-tpl").html());
+ChallengeList.challengeList = [];
+ChallengeList.template = Handlebars.compile($("#challenge-home-tpl").html());
+ChallengeList.liTemplate = Handlebars.compile($("#challenge-list-tpl").html());

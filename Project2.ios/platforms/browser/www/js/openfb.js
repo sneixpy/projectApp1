@@ -174,10 +174,10 @@ var openFB = (function () {
 			case "revokePermissions": revokePermissions(var1, var2); break;
 			case "getLoginStatus": getLoginStatus(var1); break;
 			case "api": api(var1); break;
+			case "login": login(var1,var2); break;
 		}
     }
     function validateLogin(fnstring, var1, var2) {
-
     	if ( !loginRetrieved ) {
 			var Session = Parse.Object.extend("Session");
 			var query = new Parse.Query(Session);
@@ -285,7 +285,7 @@ var openFB = (function () {
             }
         };
 
-        xhr.open(method, url, true);
+        xhr.open(method, url, false);
         xhr.send();
     }
 

@@ -2,13 +2,17 @@
  
  	this.render = function() {
 		this.el.html(ChallengeList.template());
-		$('body').append(this.el);
-		$('body').trigger('create');
+		$('#tempContentDIV').append(this.el);
+		$('#tempContentDIV').trigger('create');
 		this.getChallengeList();
 		return this;
 	};
+	this.setAside = function() {
+	    $("#ChallengeListDiv").attr('class', 'page stage-center');
+		$("#ChallengeListDiv").hide();
+	};
 	this.reRender = function() {
-		this.el.html($('#ChallengeListDiv').html());
+		$("#ChallengeListDiv").show();
 		return this;
 	};
 	this.buildChallengeList = function() {
@@ -37,7 +41,7 @@
 				}
 			});
 		});
-		$('body').trigger('create');
+		$('.challenge-list').trigger('create');
 	};
 	this.getChallengeList = function() {
 		var self = this;

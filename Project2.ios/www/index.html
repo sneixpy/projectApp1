@@ -12,6 +12,7 @@
 
 <script type="text/javascript" charset="utf-8">
 Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3tQ4ACY2XrJIdmJA91grNHrs");
+var ISMEMBERLOGGEDIN = false;
 var GUUID = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 	var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
 	return v.toString(16);
@@ -24,24 +25,48 @@ openFB.init({appId: '1630652160519912',
 	cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&'});
 ********/
 //  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
-
-openFB.init({appId: '1630652160519912', 
-	oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&', 
-	cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&',
-	tokenStore: window.localStorage});
+if (window.localStorage.fbAccessToken) {
+	openFB.init({appId: '1630652160519912', 
+		oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&', 
+		cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&',
+		tokenStore: window.localStorage,
+		accessToken: window.localStorage.fbAccessToken});
+} else {
+	openFB.init({appId: '1630652160519912', 
+		oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&', 
+		cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&',
+		tokenStore: window.localStorage});
+}
 
 
 </script>
 
-<body class="ui-mobile-viewport ui-overlay-b">
+<body class="ui-mobile-viewport ui-overlay-b ui-page-theme-b">
 <div id="fb-root"></div>
 
+<div id="contentDIV"></div>
+<div id="panelDIV"></div>
+<div id="tempContentDIV"></div>
+<script id="panel-overlay-tpl" type="text/x-handlebars-template">
+<div data-role="panel" id="panel-overlay" data-display="overlay" class="ui-page-theme-b">
+	<br><br>
+	<ul data-role="listview">
+		<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+		<li><a href="#" data-rel="close" onclick="goCreateChallenge();">Create New Challenge</a></li>
+		<li><a href="#" data-rel="close" onclick="goMemberProfile();">Member Profile</a></li>
+		<li><a href="#" data-rel="close" onclick="goLoginPage();">Login Page</a></li>
+		<li><a href="#" data-rel="close" onclick="goMemberChallenges();">Challenges</a></li>
+		<li><a href="#" data-rel="close" onclick="goLogout();">Logout</a></li>
+	</ul>
+	<br><br>
+</div>
+</script>
+
+
 <script id="member-login-tpl" type="text/x-handlebars-template">
-<div data-role="page" id="memberLogin" class="ui-page-theme-b">
-	<div data-role="header">
+<div data-role="page" id="MemberLogin" class="ui-page-theme-b">
+	<div id="headerDIV" data-role="header">
 		<h1>Login</h1>
-		<a href="#panel-overlay" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Menu</a>
-		<!--<a href="goHome();" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Back</a>-->
 	</div>
 	<!-- /header -->
 	<div role="main" class="ui-content">
@@ -51,23 +76,13 @@ openFB.init({appId: '1630652160519912',
 		</div>
 	
 	<!-- /content -->
-		<div data-role="panel" id="panel-overlay" data-display="overlay">
-			<ul data-role="listview">
-				<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
-				<li><a href="#">List item</a></li>
-				<li><a href="#">List item</a></li>
-				<li><a href="#">List item</a></li>
-			</ul>
-			<br><br>
-			<button class="ui-btn ui-corner-all ui-shadow">Button</button>
-		</div>
 	</div>
 </div>
 </script>
 
 <script id="challenge-home-tpl" type="text/x-handlebars-template">
 <div data-role="page" id="ChallengeList" class="ui-page-theme-b">
-	<div data-role="header">
+	<div id="headerDIV" data-role="header">
 		<h1>Select a Challenge</h1>
 		<a href="#panel-overlay" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Menu</a>
 		<!--<a href="goHome();" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Back</a>-->
@@ -75,30 +90,36 @@ openFB.init({appId: '1630652160519912',
 	<!-- /header -->
 	<div role="main" class="ui-content">
 
-		<div style="margin-bottom:1em;" class="ui-body ui-body-b ui-corner-all" id="ui-body-test">
-
-		</div>
 		<div class="scroll">
-			<div data-content-theme="b" data-role="collapsibleset" class="challenge-list">
+			<div class="challenge-list">
 			</div>
 		</div>
 	
 	<!-- /content -->
-		<div data-role="panel" id="panel-overlay" data-display="overlay">
-			<ul data-role="listview">
-				<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
-				<li><a href="#">List item</a></li>
-				<li><a href="#">List item</a></li>
-				<li><a href="#">List item</a></li>
-			</ul>
-			<br><br>
-			<button class="ui-btn ui-corner-all ui-shadow">Button</button>
+	</div>
+</div>
+</script>
+<script id="challenge-who-tpl" type="text/x-handlebars-template">
+<div data-role="page" id="ChallengeWho" class="ui-page-theme-b">
+	<div id="headerDIV" data-role="header">
+		<h1>Find a Challenger</h1>
+		<a onclick="goCreateChallenge();" href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left">Done</a>
+	</div>
+	<!-- /header -->
+	<div role="main" class="ui-content">
+		<div class="scroll">
+			<div class='search-bar'><input class='search-key' type="search" autocorrect="off" autocapitalize="off"/></div>
+	
+			<div data-content-theme="b" data-role="collapsibleset" class="contact-list">
+			</div>
 		</div>
+	<!-- /content -->
 	</div>
 </div>
 </script>
 
 <script id="challenge-list-tpl" type="text/x-handlebars-template">
+    <div data-content-theme="b" data-role="collapsibleset">
     {{#.}}
 	<div data-role="collapsible">
 		<h3>{{this.Name}}</h3>
@@ -119,31 +140,7 @@ openFB.init({appId: '1630652160519912',
 		</form>
 	</div>
     {{/.}}
-</script>
-<script id="challenge-who-tpl" type="text/x-handlebars-template">
-<div data-role="page" id="testpage2" class="ui-page-theme-b">
-	<div data-role="header" data-position="fixed">
-		<h1>Find a Challenger</h1>
-		<a href="#panel-overlay" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Menu</a>
-		<a onclick="goHome();" href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left">Back</a>
-	</div>
-	<div class='search-bar'><input class='search-key' type="search" autocorrect="off" autocapitalize="off"/></div>
-	<!-- /header -->
-	<div data-content-theme="b" data-role="collapsibleset" class="contact-list">
-	</div>
-	
-	<!-- /content -->
-	<div data-role="panel" id="panel-overlay" data-display="overlay">
-		<ul data-role="listview">
-			<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
-			<li><a href="#">List item</a></li>
-			<li><a href="#">List item</a></li>
-			<li><a href="#">List item</a></li>
-		</ul>
-		<br><br>
-		<button class="ui-btn ui-corner-all ui-shadow">Button</button>
-	</div>
-</div>
+    </div>
 </script>
 <script id="contact-list-tpl" type="text/x-handlebars-template">
     {{#.}}
@@ -165,6 +162,7 @@ openFB.init({appId: '1630652160519912',
 <script src="js/ChallengeDetails.js"></script>
 <script src="js/ChallengeWho.js"></script>
 <script src="js/MemberLogin.js"></script>
+<script src="js/PanelOverlay.js"></script>
 <script src="js/storage/memory-store.js"></script>
 <script src="js/main.js"></script>
 </body>
