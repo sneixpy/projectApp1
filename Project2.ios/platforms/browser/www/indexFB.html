@@ -46,6 +46,7 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 <script src="cordova.js"></script>
 
 <script src="js/openfb.js"></script>
+<script src="js/openVenmo.js"></script>
 
 <script>
 
@@ -56,12 +57,12 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 	});
 	//alert(GUUID);
      // Defaults to sessionStorage for storing the Facebook token
-     openFB.init({appID: '1630652160519912', oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&', cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&'});
+     openFB.init({appId: '1630652160519912', oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?type=facebook&GUUID='+GUUID+'&', cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?type=facebook&GUUID='+GUUID+'&'});
     //  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
     //  openFB.init({appId: 'YOUR_FB_APP_ID', tokenStore: window.localStorage});
     
     
-	openVenmo.init({clientId: '2921', oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?type=vemno&GUUID='+GUUID+'&', cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?type=vemno&GUUID='+GUUID+'&'});
+	openVenmo.init({cID: '2921', oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?type=venmo&GUUID='+GUUID, cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?type=venmo&GUUID='+GUUID});
 
     function login() {
 		var var1 = function(response) {
@@ -82,8 +83,8 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 				alert('Venmo login failed: ' + response.error);
 			}
 		};
-		var var2 = {scope: 'make_payments,access_profile'};
-		openFB.validateLogin("login", var1, var2); 
+		var var2 = {scope: 'make_payments access_profile'};
+		openVenmo.validateLogin("login", var1, var2); 
     }
     function getInfo() {
 		

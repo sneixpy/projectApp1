@@ -27,14 +27,14 @@ openFB.init({appId: '1630652160519912',
 //  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
 if (window.localStorage.fbAccessToken) {
 	openFB.init({appId: '1630652160519912', 
-		oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?type=facebook&GUUID='+GUUID+'&', 
-		cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?type=facebook&GUUID='+GUUID+'&',
+		oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'', 
+		cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'',
 		tokenStore: window.localStorage,
 		accessToken: window.localStorage.fbAccessToken});
 } else {
 	openFB.init({appId: '1630652160519912', 
-		oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?type=facebook&GUUID='+GUUID+'&', 
-		cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?type=facebook&GUUID='+GUUID+'&',
+		oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'', 
+		cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'',
 		tokenStore: window.localStorage});
 }
 

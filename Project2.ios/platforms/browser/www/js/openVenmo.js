@@ -56,7 +56,7 @@ var openVenmo = (function () {
      * Initialize the openVenmo module. You must use this function and initialize the module with an appId before you can
      * use any other function.
      * @param params - init paramters
-     *  clientId: (Required) The id of the Venmo app,
+     *  cID: (Required) The id of the Venmo app,
      *  tokenStore: (optional) The store used to save the Venmo token. If not provided, we use sessionStorage.
      *  loginURL: (optional) The OAuth login URL. Defaults to https://www.Venmo.com/dialog/oauth.
      *  logoutURL: (optional) The logout URL. Defaults to https://www.Venmo.com/logout.php.
@@ -67,8 +67,8 @@ var openVenmo = (function () {
      */
     function init(params) {
 
-        if (params.clientId) {
-            venmoClientID = params.clientId;
+        if (params.cID) {
+            venmoClientID = params.cID;
         } else {
             throw 'clientId parameter not set in init()';
         }
@@ -157,8 +157,8 @@ var openVenmo = (function () {
         loginProcessed = false;
 
         startTime = new Date().getTime();
-        loginWindow = window.open(loginURL + '?client_id=' + venmoClientID +
-            '&response_type=token&scope=' + scope, '_blank', 'location=no,clearcache=yes');
+        loginWindow = window.open(loginURL + '?client_id=' + venmoClientID + '&redirect_uri=' + encodeURIComponent(redirectURL) +
+            '&response_type=token&scope=' + encodeURIComponent(scope), '_blank', 'location=no,clearcache=yes');
 
         // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
         if (runningInCordova) {
