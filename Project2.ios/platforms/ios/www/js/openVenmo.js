@@ -1,26 +1,27 @@
 /**
- * OpenFB is a micro-library that lets you integrate your JavaScript application with Facebook.
- * OpenFB works for both BROWSER-BASED apps and CORDOVA/PHONEGAP apps.
- * This library has no dependency: You don't need (and shouldn't use) the Facebook SDK with this library. Whe running in
- * Cordova, you also don't need the Facebook Cordova plugin. There is also no dependency on jQuery.
- * OpenFB allows you to login to Facebook and execute any Facebook Graph API request.
+ * openVenmo is a micro-library that lets you integrate your JavaScript application with Venmo.
+ * openVenmo works for both BROWSER-BASED apps and CORDOVA/PHONEGAP apps.
+ * This library has no dependency: You don't need (and shouldn't use) the Venmo SDK with this library. Whe running in
+ * Cordova, you also don't need the Venmo Cordova plugin. There is also no dependency on jQuery.
+ * openVenmo allows you to login to Venmo and execute any Venmo Graph API request.
  * @author Christophe Coenraets @ccoenraets
  * @version 0.5
  */
-var openFB = (function () {
+var openVenmo = (function () {
 
-    var loginURL = 'https://www.facebook.com/dialog/oauth',
+    var loginURL = 'https://api.venmo.com/v1/oauth/authorize',
 
-        logoutURL = 'https://www.facebook.com/logout.php',
+        logoutURL = 'https://www.vemno.com/logout.php',
         
         loginRetrieved = false,
 
-    // By default we store fbtoken in sessionStorage. This can be overridden in init()
+    // By default we store venmoAccessToken in sessionStorage. This can be overridden in init()
         tokenStore = window.sessionStorage,
 
-    // The Facebook App Id. Required. Set using init().
-        fbAppId,
-
+    // The Venmo App Id. Required. Set using init().
+        //fbAppId,
+		venmoClientID,
+		
         context = window.location.pathname.substring(0, window.location.pathname.lastIndexOf("/")),
 
         baseURL = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + context,
@@ -29,7 +30,7 @@ var openFB = (function () {
         oauthRedirectURL = baseURL + '/oauthcallback.html',
 
     // Default Cordova OAuth redirect URL. Can be overriden in init()
-        cordovaOAuthRedirectURL = "https://www.facebook.com/connect/login_success.html",
+        cordovaOAuthRedirectURL = "https://www.venmo.com/connect/login_success.html",
 
     // Default Logout redirect URL. Can be overriden in init()
         logoutRedirectURL = baseURL + '/logoutcallback.html',
@@ -52,24 +53,24 @@ var openFB = (function () {
     }, false);
 
     /**
-     * Initialize the OpenFB module. You must use this function and initialize the module with an appId before you can
+     * Initialize the openVenmo module. You must use this function and initialize the module with an appId before you can
      * use any other function.
      * @param params - init paramters
-     *  appId: (Required) The id of the Facebook app,
-     *  tokenStore: (optional) The store used to save the Facebook token. If not provided, we use sessionStorage.
-     *  loginURL: (optional) The OAuth login URL. Defaults to https://www.facebook.com/dialog/oauth.
-     *  logoutURL: (optional) The logout URL. Defaults to https://www.facebook.com/logout.php.
+     *  clientId: (Required) The id of the Venmo app,
+     *  tokenStore: (optional) The store used to save the Venmo token. If not provided, we use sessionStorage.
+     *  loginURL: (optional) The OAuth login URL. Defaults to https://www.Venmo.com/dialog/oauth.
+     *  logoutURL: (optional) The logout URL. Defaults to https://www.Venmo.com/logout.php.
      *  oauthRedirectURL: (optional) The OAuth redirect URL. Defaults to [baseURL]/oauthcallback.html.
-     *  cordovaOAuthRedirectURL: (optional) The OAuth redirect URL. Defaults to https://www.facebook.com/connect/login_success.html.
+     *  cordovaOAuthRedirectURL: (optional) The OAuth redirect URL. Defaults to https://www.Venmo.com/connect/login_success.html.
      *  logoutRedirectURL: (optional) The logout redirect URL. Defaults to [baseURL]/logoutcallback.html.
      *  accessToken: (optional) An already authenticated access token.
      */
     function init(params) {
 
-        if (params.appId) {
-            fbAppId = params.appId;
+        if (params.clientId) {
+            venmoClientID = params.clientId;
         } else {
-            throw 'appId parameter not set in init()';
+            throw 'clientId parameter not set in init()';
         }
 
         if (params.tokenStore) {
@@ -77,7 +78,7 @@ var openFB = (function () {
         }
 
         if (params.accessToken) {
-            tokenStore.fbAccessToken = params.accessToken;
+            tokenStore.venmoAccessToken = params.accessToken;
         }
 
         loginURL = params.loginURL || loginURL;
@@ -88,11 +89,11 @@ var openFB = (function () {
     }
 
     /**
-     * Checks if the user has logged in with openFB and currently has a session api token.
+     * Checks if the user has logged in with openVenmo and currently has a session api token.
      * @param callback the function that receives the loginstatus
      */
     function getLoginStatus(callback) {
-        var token = tokenStore.fbAccessToken,
+        var token = tokenStore.venmoAccessToken,
             loginStatus = {};
         if (token) {
             loginStatus.status = 'connected';
@@ -104,12 +105,12 @@ var openFB = (function () {
     }
 
     /**
-     * Login to Facebook using OAuth. If running in a Browser, the OAuth workflow happens in a a popup window.
+     * Login to Venmo using OAuth. If running in a Browser, the OAuth workflow happens in a a popup window.
      * If running in Cordova container, it happens using the In-App Browser. Don't forget to install the In-App Browser
      * plugin in your Cordova project: cordova plugins add org.apache.cordova.inappbrowser.
      *
      * @param callback - Callback function to invoke when the login process succeeds
-     * @param options - options.scope: The set of Facebook permissions requested
+     * @param options - options.scope: The set of Venmo permissions requested
      * @returns {*}
      */
     function login(callback, options) {
@@ -119,8 +120,8 @@ var openFB = (function () {
             scope = '',
             redirectURL = runningInCordova ? cordovaOAuthRedirectURL : oauthRedirectURL;
 
-        if (!fbAppId) {
-            return callback({status: 'unknown', error: 'Facebook App Id not set.'});
+        if (!venmoClientID) {
+            return callback({status: 'unknown', error: 'Venmo App Id not set.'});
         }
 
         // Inappbrowser load start handler: Used when running in Cordova only
@@ -156,7 +157,7 @@ var openFB = (function () {
         loginProcessed = false;
 
         startTime = new Date().getTime();
-        loginWindow = window.open(loginURL + '?client_id=' + fbAppId + '&redirect_uri=' + redirectURL +
+        loginWindow = window.open(loginURL + '?client_id=' + venmoClientID +
             '&response_type=token&scope=' + scope, '_blank', 'location=no,clearcache=yes');
 
         // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
@@ -186,7 +187,7 @@ var openFB = (function () {
 				success: function(results) {
 					if ( results.length > 0 ) {
 						var object = results[0];
-						tokenStore.fbAccessToken = object.get('access_token');
+						tokenStore.venmoAccessToken = object.get('access_token');
 						loginRetrieved = true;
 						runFunction(fnstring, var1, var2);
 					} else {
@@ -204,11 +205,11 @@ var openFB = (function () {
     /**
      * Called either by oauthcallback.html (when the app is running the browser) or by the loginWindow loadstart event
      * handler defined in the login() function (when the app is running in the Cordova/PhoneGap container).
-     * @param url - The oautchRedictURL called by Facebook with the access_token in the querystring at the ned of the
+     * @param url - The oautchRedictURL called by Venmo with the access_token in the querystring at the ned of the
      * OAuth workflow.
      */
     function oauthCallback(url) {
-        // Parse the OAuth data received from Facebook
+        // Parse the OAuth data received from Venmo
         var queryString,
             obj;
 
@@ -216,7 +217,7 @@ var openFB = (function () {
         if (url.indexOf("access_token=") > 0) {
             queryString = url.substr(url.indexOf('#') + 1);
             obj = parseQueryString(queryString);
-            tokenStore.fbAccessToken = obj['access_token'];
+            tokenStore.venmoAccessToken = obj['access_token'];
             if (loginCallback) loginCallback({status: 'connected', authResponse: {accessToken: obj['access_token']}});
         } else if (url.indexOf("error=") > 0) {
             queryString = url.substring(url.indexOf('?') + 1, url.indexOf('#'));
@@ -228,16 +229,16 @@ var openFB = (function () {
     }
 
     /**
-     * Logout from Facebook, and remove the token.
-     * IMPORTANT: For the Facebook logout to work, the logoutRedirectURL must be on the domain specified in "Site URL" in your Facebook App Settings
+     * Logout from Venmo, and remove the token.
+     * IMPORTANT: For the Venmo logout to work, the logoutRedirectURL must be on the domain specified in "Site URL" in your Venmo App Settings
      *
      */
     function logout(callback) {
         var logoutWindow,
-            token = tokenStore.fbAccessToken;
+            token = tokenStore.venmoAccessToken;
 
         /* Remove token. Will fail silently if does not exist */
-        tokenStore.removeItem('fbAccessToken');
+        tokenStore.removeItem('venmoAccessToken');
 
         if (token) {
             logoutWindow = window.open(logoutURL + '?access_token=' + token + '&next=' + logoutRedirectURL, '_blank', 'location=no,clearcache=yes');
@@ -255,10 +256,10 @@ var openFB = (function () {
     }
 
     /**
-     * Lets you make any Facebook Graph API request.
+     * Lets you make any Venmo Graph API request.
      * @param obj - Request configuration object. Can include:
      *  method:  HTTP method: GET, POST, etc. Optional - Default is 'GET'
-     *  path:    path in the Facebook graph: /me, /me.friends, etc. - Required
+     *  path:    path in the Venmo graph: /me, /me.friends, etc. - Required
      *  params:  queryString parameters as a map - Optional
      *  success: callback function when operation succeeds - Optional
      *  error:   callback function when operation fails - Optional
@@ -270,9 +271,9 @@ var openFB = (function () {
             xhr = new XMLHttpRequest(),
             url;
 
-        params['access_token'] = tokenStore.fbAccessToken;
+        params['access_token'] = tokenStore.venmoAccessToken;
 
-        url = 'https://graph.facebook.com' + obj.path + '?' + toQueryString(params);
+        url = 'https://graph.Venmo.com' + obj.path + '?' + toQueryString(params);
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {

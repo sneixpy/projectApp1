@@ -13,11 +13,8 @@ var ChallengeWho = function(ChallengeID) {
  
 	this.render = function() {
 		this.el.html(ChallengeWho.template());
-		$('#contentDIV').html(this.el);
-		$('body').trigger('create');
-		//app.slidePage(this);
-		//$('.ui-page-theme-b').css("display","block");
-		//this.searchContacts();
+		$('#contentDIV').append(this.el);
+		$('#contentDIV').trigger('create');
 		return this;
 	};
 	this.reRender = function() {
@@ -57,14 +54,13 @@ var ChallengeWho = function(ChallengeID) {
 	};
 
     this.initialize = function() {
-        this.el = $('<div id="ChallengeWhoDiv"/>');
 		var self = this;
+        this.el = $('<div id="ChallengeWhoDiv"/>');
 		this.getContacts(); // refresh contact list that is stored in variable.
 		this.el.on('keyup', '.search-key', this.searchContacts);
 		//self.render();
     };
- 
-    this.initialize();
+	this.initialize();
  
  }
  

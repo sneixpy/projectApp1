@@ -19,6 +19,7 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 <div class="content content-padded">
 
 <button class="btn btn-block" onclick="login()">Login with Facebook</button>
+<button class="btn btn-block" onclick="Venmologin()">Login with Venmo</button>
 <hr/>
 
 <button class="btn btn-block" onclick="getInfo()">Get My Info</button>
@@ -47,15 +48,21 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 <script src="js/openfb.js"></script>
 
 <script>
+
+	var isMemberLoggedIn = false;
 	var GUUID = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 			var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
 			return v.toString(16);
 	});
 	//alert(GUUID);
      // Defaults to sessionStorage for storing the Facebook token
-     openFB.init({appId: '1630652160519912', oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&', cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&'});
+     openFB.init({appID: '1630652160519912', oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&', cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'&'});
     //  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
     //  openFB.init({appId: 'YOUR_FB_APP_ID', tokenStore: window.localStorage});
+    
+    
+	openVenmo.init({clientId: '2921', oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?type=vemno&GUUID='+GUUID+'&', cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?type=vemno&GUUID='+GUUID+'&'});
+
     function login() {
 		var var1 = function(response) {
 			if(response.status === 'connected') {
@@ -65,6 +72,17 @@ Parse.initialize("6Wy9VizWsuh5dXErxzoagrHF3m6p0065xVO6C4XA", "BFINDwmJhhAIhc9o3t
 			}
 		};
 		var var2 = {scope: 'email,publish_actions'};
+		openFB.validateLogin("login", var1, var2); 
+    }
+    function Venmologin() {
+		var var1 = function(response) {
+			if(response.status === 'connected') {
+				alert('Venmo login succeeded, got access token: ' + response.authResponse.accessToken);
+			} else {
+				alert('Venmo login failed: ' + response.error);
+			}
+		};
+		var var2 = {scope: 'make_payments,access_profile'};
 		openFB.validateLogin("login", var1, var2); 
     }
     function getInfo() {

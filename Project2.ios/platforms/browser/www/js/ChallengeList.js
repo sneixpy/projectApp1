@@ -3,11 +3,12 @@
  	this.render = function() {
 		this.el.html(ChallengeList.template());
 		$('#tempContentDIV').append(this.el);
-		$('body').trigger('create');
+		$('#tempContentDIV').trigger('create');
 		this.getChallengeList();
 		return this;
 	};
 	this.setAside = function() {
+	    $("#ChallengeListDiv").attr('class', 'page stage-center');
 		$("#ChallengeListDiv").hide();
 	};
 	this.reRender = function() {
@@ -40,7 +41,7 @@
 				}
 			});
 		});
-		$('body').trigger('create');
+		$('.challenge-list').trigger('create');
 	};
 	this.getChallengeList = function() {
 		var self = this;

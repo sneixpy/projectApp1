@@ -3,7 +3,7 @@
  	this.render = function() {
 		this.el.html(PanelOverlay.template());
 		$('#panelDIV').html(this.el);
-		$('body').trigger('create');
+		$('#panelDIV').trigger('create');
 		return this;
 	};
 	this.initialize = function() {

@@ -29,31 +29,31 @@
 	},
 	route: function(page,id) {  // Function to navigate all to all different pages
 		var self = this;
-		this.tDIV = [];
+		self.homePage = 'ChallengeList';
+		self.Page = page;
+		this.hideChallengeList = false;
 		if ( this.homePage === 'ChallengeList' && page != 'ChallengeList' && this.challengeList ) {
-			this.challengeList.setAside();
+			this.hideChallengeList = true;
+			//this.challengeList.setAside();
 		}
 		if (page == 'ChallengeList'){
-			this.homePage = 'ChallengeList';
 			if (this.challengeList) {
+				$('.ui-page').not('#ChallengeList').remove();
 				this.slidePage(this.challengeList.reRender());
 			} else {
 				this.challengeList = new ChallengeList();
 				this.slidePage(this.challengeList.render());
 			}
 		}else if (page == 'MemberLogin'  || !page) {
-			this.homePage = 'MemberLogin';
 			this.memberLogin = new MemberLogin();
 			this.slidePage(this.memberLogin.render());
 		}else if (page == 'chooseChallenger'){
-			this.homePage = 'chooseChallenger';
 			this.challengeWho = new ChallengeWho(id);
 			this.slidePage(this.challengeWho.render());
 		}
 		return;
 	},
 	slidePage: function(page) {
- 
 		var currentPageDest,
 			self = this;
  
@@ -63,14 +63,12 @@
 			//$('body').append(page.el);
 			this.currentPage = page;
 			return;
-		} else {
-			this.currentPage = page;
-		}
+		} 
 		// Cleaning up: remove old pages that were moved out of the viewport
 		$('.stage-right, .stage-left').not('#ChallengeListDiv').remove();
 		//$('.stage-right, .stage-left').not('.homePage').remove();
 
-		if (page === app.homePage) {
+		if (self.Page == self.homePage) {
 			// Always apply a Back transition (slide from left) when we go back to the search page
 			$(page.el).attr('class', 'page stage-left');
 			currentPageDest = "stage-right";
@@ -90,9 +88,13 @@
 			// Slide out the current page: If new page slides from the right -> slide current page to the left, and vice versa
 			$(self.currentPage.el).attr('class', 'transition ' + currentPageDest);
 			// Slide in the new page
-			$('.stage-center').not('#ChallengeListDiv').remove();
+			//$('.stage-center').not('#ChallengeListDiv').remove();
 			$(page.el).attr('class', 'page stage-center transition');
 			self.currentPage = page;
+			if (self.hideChallengeList) {
+				self.challengeList.setAside();
+			}
+			$('.stage-right, .stage-left').not('#ChallengeListDiv').remove();
 		});
 	},
 	initialize: function() {
@@ -151,8 +153,12 @@ function runFunction(fnstring) {
 		case "goCreateChallenge": goCreateChallenge(); break;
 	}
 }
+function goLogout () {
+	openFB.logout(function () {
+		app.route('MemberLogin');
+	});
+}
 function validatingLogin(fnstring) {
-	var thisOpenFB = openFB;
 	if ( !ISMEMBERLOGGEDIN ) {
 		var Session = Parse.Object.extend("Session");
 		var query = new Parse.Query(Session);
