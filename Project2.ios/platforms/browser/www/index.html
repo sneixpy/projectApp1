@@ -27,14 +27,14 @@ openFB.init({appId: '1630652160519912',
 //  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
 if (window.localStorage.fbAccessToken) {
 	openFB.init({appId: '1630652160519912', 
-		oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?type=facebook&GUUID='+GUUID+'&', 
-		cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?type=facebook&GUUID='+GUUID+'&',
+		oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'', 
+		cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'',
 		tokenStore: window.localStorage,
 		accessToken: window.localStorage.fbAccessToken});
 } else {
 	openFB.init({appId: '1630652160519912', 
-		oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?type=facebook&GUUID='+GUUID+'&', 
-		cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?type=facebook&GUUID='+GUUID+'&',
+		oauthRedirectURL: 'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'', 
+		cordovaOAuthRedirectURL:'http://stmiconsulting.com/oauthcallback.html?GUUID='+GUUID+'',
 		tokenStore: window.localStorage});
 }
 
@@ -124,19 +124,33 @@ if (window.localStorage.fbAccessToken) {
 	<div data-role="collapsible">
 		<h3>{{this.Name}}</h3>
 		<form id="thing_{{this.num}}">
+			<p><u>Units:</u></p>
 			<div>
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<label for="a_{{this.num}}">Miles</label>
-					<input type="radio" name="theme" id="a_{{this.num}}" checked>
+					<input type="radio" name="unit" id="a_{{this.num}}" checked>
 					<label for="b_{{this.num}}">Time</label>
-					<input type="radio" name="theme" id="b_{{this.num}}">
+					<input type="radio" name="unit" id="b_{{this.num}}">
+				</fieldset>
+			</div>
+			<p><u>Comparison:</u></p>
+			<div>
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<label for="accum_{{this.num}}">Accumulation</label>
+					<input type="radio" name="comparison" id="accum_{{this.num}}" checked>
+					<label for="daily_{{this.num}}">Daily</label>
+					<input type="radio" name="comparison" id="daily_{{this.num}}">
 				</fieldset>
 			</div>
 			
+			<p><u>Duration:</u></p>
 			<div id="datepicker_{{this.num}}" class="chooseDates"></div>
-			<input type="hidden" id="input1_{{this.num}}" readonly="true" class="input1" size="10">
-			<input type="hidden" id="input2_{{this.num}}" readonly="true" class="input2" size="10">
+			<input type="hidden" id="input1_{{this.num}}" readonly="true" class="input1" size="10"/>
+			<input type="hidden" id="input2_{{this.num}}" readonly="true" class="input2" size="10"/>
+			
+			
 			<div class="ui-controlgroup-horizontal"><button class="ui-btn ui-corner-all ui-shadow" onclick="onChooseChallenger({{this.num}});">Select Challengers</button></div>
+			
 		</form>
 	</div>
     {{/.}}
